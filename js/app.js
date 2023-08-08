@@ -5146,7 +5146,7 @@
             let headerHeightEventAdded = false;
             const headerHeightAccounting = function() {
                 const headerHeight = headerElem.offsetHeight;
-                const anchorLinks = document.querySelectorAll(`${menuLink}[href^="#"]`);
+                const anchorLinks = document.querySelectorAll(`a[href^="#"]`);
                 if (!anchorLinks) {
                     console.error(`${headerHeightAccounting.name}:\nНа странице отсутствуют ссылки`);
                     return;
