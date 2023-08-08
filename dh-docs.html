@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="ru" class="page">
+
+<head>
+	<title>HomePage</title>
+	<meta charset="UTF-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20230809031952" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="body">
+	<div class="wrapper">
+		<header class="header main-header header__dynamic">
+			<div class="header__container">
+				<button class="header__burger visually-hidden btn-reset" tabindex="1">
+					<span></span>
+				</button>
+
+				<a class="header__logo">
+					<img src="img/dynamic-header/dynamic-header-logo.svg" alt="" />
+				</a>
+
+				<div class="header__menu-wrapper">
+					<div class="header__search">
+						<div class="header__input-overflow">
+							<div class="header__input-wrapper">
+								<input class="header__search-input input-reset" type="text" id="searchInput" placeholder="Найти параметры" tabindex="5" />
+								<button class="header__search-clear btn-reset">
+									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 20 20" fill="none">
+										<path d="M5.83337 5.83337L14.1667 14.1667M5.83337 14.1667L14.1667 5.83337" stroke="#262931" stroke-width="0.833333" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</button>
+								<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" class="header__search-icon">
+									<path d="M35 35L27.7616 27.7616M27.7616 27.7616C28.9998 26.5235 29.9819 25.0536 30.652 23.4359C31.3221 21.8182 31.667 20.0843 31.667 18.3333C31.667 16.5823 31.3221 14.8484 30.652 13.2307C29.9819 11.613 28.9998 10.1431 27.7616 8.90498C26.5235 7.66683 25.0536 6.68468 23.4359 6.0146C21.8182 5.34452 20.0843 4.99963 18.3333 4.99963C16.5823 4.99963 14.8484 5.34452 13.2307 6.0146C11.613 6.68468 10.1431 7.66683 8.90498 8.90498C6.40443 11.4055 4.99963 14.797 4.99963 18.3333C4.99963 21.8696 6.40443 25.2611 8.90498 27.7616C11.4055 30.2622 14.797 31.667 18.3333 31.667C21.8696 31.667 25.2611 30.2622 27.7616 27.7616Z" stroke="#262931" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+							</div>
+						</div>
+						<ul class="header__search-list list-reset" id="searchSuggestions"></ul>
+					</div>
+					<nav class="header__menu">
+						<ul class="header__menu-list list-reset">
+							<li class="header__menu-item">
+								<a href="#hero" class="header__menu-link" tabindex="2">Главная</a>
+							</li>
+							<li class="header__menu-item">
+								<a href="#presentation" class="header__menu-link" tabindex="3">Примеры</a>
+							</li>
+							<li class="header__menu-item">
+								<a href="#docs" class="header__menu-link" tabindex="4">Документация</a>
+							</li>
+						</ul>
+					</nav>
+					<ul class="header__social list-reset">
+						<li class="header__social-item">
+							<a href="https://t.me/slnest" target="_blank" class="header__social-link header__social-link--pc">
+								<svg width="30px" height="30px" viewBox="0 0 100 100" fill="none">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M50 100c27.614 0 50-22.386 50-50S77.614 0 50 0 0 22.386 0 50s22.386 50 50 50Zm21.977-68.056c.386-4.38-4.24-2.576-4.24-2.576-3.415 1.414-6.937 2.85-10.497 4.302-11.04 4.503-22.444 9.155-32.159 13.734-5.268 1.932-2.184 3.864-2.184 3.864l8.351 2.577c3.855 1.16 5.91-.129 5.91-.129l17.988-12.238c6.424-4.38 4.882-.773 3.34.773l-13.49 12.882c-2.056 1.804-1.028 3.35-.129 4.123 2.55 2.249 8.82 6.364 11.557 8.16.712.467 1.185.778 1.292.858.642.515 4.111 2.834 6.424 2.319 2.313-.516 2.57-3.479 2.57-3.479l3.083-20.226c.462-3.511.993-6.886 1.417-9.582.4-2.546.705-4.485.767-5.362Z" fill="#ffffff"></path>
+								</svg>
+							</a>
+						</li>
+						<li class="header__social-item">
+							<a href="https://t.me/slnest" target="_blank" class="header__social-link header__social-link--mobile">
+								<svg width="30px" height="30px" viewBox="0 0 100 100" fill="none">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M50 100c27.614 0 50-22.386 50-50S77.614 0 50 0 0 22.386 0 50s22.386 50 50 50Zm21.977-68.056c.386-4.38-4.24-2.576-4.24-2.576-3.415 1.414-6.937 2.85-10.497 4.302-11.04 4.503-22.444 9.155-32.159 13.734-5.268 1.932-2.184 3.864-2.184 3.864l8.351 2.577c3.855 1.16 5.91-.129 5.91-.129l17.988-12.238c6.424-4.38 4.882-.773 3.34.773l-13.49 12.882c-2.056 1.804-1.028 3.35-.129 4.123 2.55 2.249 8.82 6.364 11.557 8.16.712.467 1.185.778 1.292.858.642.515 4.111 2.834 6.424 2.319 2.313-.516 2.57-3.479 2.57-3.479l3.083-20.226c.462-3.511.993-6.886 1.417-9.582.4-2.546.705-4.485.767-5.362Z" fill="#ffffff"></path>
+								</svg>
+								<span>Связаться с разработчиком</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
+
+		<main class="main">
+			<section class="hero" id="hero">
+				<div class="container hero__container">
+					<!-- <div class="hero__content-wrapper"> -->
+					<div class="hero__text">
+						<h1 class="hero__title title">
+							Dynamic Header Plugin
+						</h1>
+						<p class="hero__subtitle">
+							Dynamic Header - это плагин, который позволит
+							Вам создать уникальную шапку на своем сайте,
+							настроив ее в соответствии с вашими
+							потребностями.
+						</p>
+						<a href="#presentation" class="hero__link">Посмотреть примеры</a>
+					</div>
+					<div class="hero__media">
+						<iframe class="hero__iframe" src="dh-changeable-header.html" frameborder="0" width="700" height="400"></iframe>
+					</div>
+					<!-- </div> -->
+				</div>
+			</section>
+
+			<section class="presentation" id="presentation">
+				<div class="container presentation__container">
+					<h2 class="presentation__title title">
+						Примеры использования
+					</h2>
+					<div class="presentation__slider swiper">
+						<div class="presentation__swiper-wrapper swiper-wrapper">
+							<div class="presentation__slide swiper-slide">
+								<iframe class="presentation__slide-iframe presentation__slide-iframe--pc" src="dh-docs-slide-1.html" frameborder="0"></iframe>
+								<iframe class="presentation__slide-iframe presentation__slide-iframe--mobile iframe-hidden" loading="lazy" src="dh-docs-slide-1-mobile.html" frameborder="0"></iframe>
+								<div class="presentation__checkbox change-menu">
+									<input class="change-menu__checkbox theme-checkbox" id="change-menu__checkbox" type="checkbox" />
+								</div>
+							</div>
+							<div class="presentation__slide swiper-slide">
+								<iframe class="presentation__slide-iframe presentation__slide-iframe--pc" src="dh-docs-slide-2.html" frameborder="0"></iframe>
+								<iframe class="presentation__slide-iframe presentation__slide-iframe--mobile iframe-hidden" loading="lazy" src="dh-docs-slide-2-mobile.html" frameborder="0"></iframe>
+								<div class="presentation__checkbox change-menu">
+									<input class="change-menu__checkbox theme-checkbox" id="change-menu__checkbox" type="checkbox" />
+								</div>
+							</div>
+						</div>
+						<div class="presentation__slider-navigation swiper-navigation">
+							<div class="presentation__slider-button-prev">
+								<div class="chevrons">
+									<div class="chevrondown"></div>
+									<div class="chevrondown"></div>
+								</div>
+							</div>
+							<div class="presentation__slider-pagination swiper-pagination"></div>
+							<div class="presentation__slider-button-next">
+								<div class="chevrons">
+									<div class="chevrondown"></div>
+									<div class="chevrondown"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="docs" id="docs">
+				<div class="container docs__container">
+					<h2 class="title docs__title">Документация</h2>
+
+					<div class="docs__content">
+						<div class="docs__option docs__option-size" data-content="header, шапка, хедер">
+							<div class="docs__option-title">header</div>
+
+							<div class="docs__option-media">
+								<code><span class="js-function">dynamicHeaderControl</span><span class="js-function-bracket">(</span><span class="js-mark">"</span><span class="js-class">header</span><span class="js-mark">", </span><span class="js-bracket">{</span><span class="js-bracket">}</span><span class="js-function-bracket">)</span><span class="js-semicolon">;</span></code>
+							</div>
+
+							<div class="docs__option-text">
+								<p>
+									Header является основным элементом
+									плагина Dynamic Header, ведь именно над
+									ним проводятся все манипуляции с помощью
+									параметров.
+								</p>
+								<p>
+									<span class="docs__option-important">Важно:</span>
+									Указывать данный параметр необходимо в
+									виде строки. В ином случае могут
+									возникнуть ошибки при дальнейшем
+									использовании плагина.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="menu, меню">
+							<div class="docs__option-title">menu</div>
+							<div class="docs__option-media">
+								<code><span class="js-option">menu</span><span class="js-mark">: </span><span class="js-boolean">true</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Menu - параметр, с помощью которого Вы
+									можете определить, будет ли показано
+									выпадающее меню на мобильных
+									устройствах. Отключение меню происходит
+									путем присвоения скрывающего класса для
+									<code class="js-option">menuIcon</code>,
+									а также удаление с нее всех событий,
+									позволяющих открыть меню.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="menuBody, тело, меню, тело меню, боди, менюбоди, меню боди, бади, body, menu, menu body">
+							<div class="docs__option-title">menuBody</div>
+
+							<div class="docs__option-media">
+								<code><span class="js-option">menuBody</span><span class="js-mark">: "</span><span class="js-class">.header__menu-wrapper</span><span class="js-mark">",</span></code>
+							</div>
+
+							<div class="docs__option-text">
+								<p>
+									Menu Body это элемент, в котором
+									находятся все основные элементы
+									навигации, в данном случае - якорные
+									ссылки.
+								</p>
+								<p>
+									<span class="docs__option-important">Важно:</span>
+									Указывать данный параметр необходимо в
+									виде строки. В ином случае могут
+									возникнуть ошибки при дальнейшем
+									использовании плагина.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="menuIcon, иконка, икон, меню, иконка меню, меню айкон, меню икон">
+							<div class="docs__option-title">menuIcon</div>
+
+							<div class="docs__option-media">
+								<code><span class="js-option">menuIcon</span><span class="js-mark">: "</span><span class="js-class">.header__burger</span><span class="js-mark">",</span></code>
+							</div>
+
+							<div class="docs__option-text">
+								<p>
+									Menu Icon - она же иконка открытия меню,
+									она же бургер. Это элемент, при нажатии
+									на который будет происходить открытие и
+									закрытие меню.
+								</p>
+								<p>
+									<span class="docs__option-important">Важно:</span>
+									Указывать данный параметр необходимо в
+									виде строки. В ином случае могут
+									возникнуть ошибки при дальнейшем
+									использовании плагина.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="menuItem, элемент меню, меню">
+							<div class="docs__option-title">menuItem</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">menuItem</span><span class="js-mark">: "</span><span class="js-class">.header__menu-item</span><span class="js-mark">",</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Menu Item - элемент списка меню(тег
+									<code>li</code>), в котором находится
+									якорная ссылка.
+								</p>
+								<p>
+									<span class="docs__option-important">Важно:</span>
+									Указывать данный параметр необходимо в
+									виде строки. В ином случае могут
+									возникнуть ошибки при дальнейшем
+									использовании плагина.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="menuLink, ссылка меню, меню">
+							<div class="docs__option-title">menuLink</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">menuLink</span><span class="js-mark">: "</span><span class="js-class">.header__menu-link</span><span class="js-mark">",</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Menu Link - элемент, с помощью которого
+									происходит навигация между элементами
+									страницы, он же якорная ссылка.
+								</p>
+								<p>
+									<span class="docs__option-important">Важно:</span>
+									Указывать данный параметр необходимо в
+									виде строки. В ином случае могут
+									возникнуть ошибки при дальнейшем
+									использовании плагина.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="scrollWatch, скролл, слежка, следить">
+							<div class="docs__option-title">
+								scrollWatch
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">scrollWatch</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Scroll Watch - параметр, включив
+									который, к
+									<code class="js-option">menuItem</code>
+									будет присваиваться класс
+									<span class="js-mark">"</span><code class="js-class">active</code><span class="js-mark">"</span>, в
+									случае появления в поле видимости
+									секции, id которой совпадает с атрибутом
+									href в
+									<code class="js-option">menuLink</code>.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="headerScroll, скролл, скролл шапки, шапка">
+							<div class="docs__option-title">
+								headerScroll
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">headerScroll</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Header Scroll - объект, в котором можно
+									указать 4 необязательных параметра:
+								</p>
+								<ul class="list-reset">
+									<li>
+										<code class="js-option">headerScrollClass</code>
+										- определяет класс, который будет
+										присвоен по достижении пользователем
+										определенной позиции при прокрутке
+										страницы. <br />
+										По умолчанию -
+										<span class="js-mark">"</span><code class="js-class">header-dark</code><span class="js-mark">"</span>.
+									</li>
+									<li>
+										<code class="js-option">headerScrollPosition</code>
+										- число, указывающее на позицию
+										страницы, в которой будет присвоен
+										класс <span class="js-mark">"</span><code class="js-option">headerScrollClass</code><span class="js-mark">"</span>.
+										<br />
+										По умолчанию равен высоте
+										<span class="js-mark">"</span><code class="js-option"><i>header</i></code><span class="js-mark">"</span>.
+									</li>
+									<li>
+										<p>
+											<code class="js-option">headerScrollEndPosition</code>
+											- число, указывающее на позицию
+											страницы, в которой будет убран
+											класс
+											<span class="js-mark">"</span><code class="js-option">headerScrollClass</code><span class="js-mark">"</span>.
+											<br />
+											По умолчанию равен значению из
+											<span class="js-mark">"</span><code class="js-option">headerScrollPosition</code><span class="js-mark">"</span>.
+										</p>
+
+										<p>
+											<span class="docs__option-important">
+												Важно:
+											</span>
+											число, указанное в данном
+											параметре не может превышать
+											число, указанное в
+											<span class="js-mark">"</span><code class="js-option">headerScrollPosition</code><span class="js-mark">"</span>.
+										</p>
+									</li>
+									<li>
+										<code class="js-option">headerScrollMobile</code>
+										- параметр, с помощью которого
+										появляется возможность включить
+										присвоние класса шапке сайта при
+										прокрутке на мобильных устройствах.
+										<br />
+										По умолчанию -
+										<code class="js-boolean">false</code>.
+									</li>
+								</ul>
+								<p>
+									Значение
+									<code class="js-boolean">true</code>
+									у
+									<code class="js-option">headerScroll</code>
+									присвоит всем вышеперечисленным
+									параметрам значение по умолчанию.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="dynamic, динамический, динамик, скрытие">
+							<div class="docs__option-title">dynamic</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">dynamic</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Данный параметр изменяет поведение шапки
+									сайта. Включив его, пользователь может
+									скрывать шапку при прокрутке страницы
+									вниз, что позволяет увеличить
+									пространство для просмотра контента на
+									сайте. При прокрутке страницы вверх,
+									шапка появляется, обеспечивая быстрый
+									доступ к навигации и другим важным
+									элементам интерфейса.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="mediaQuery, медиа запрос, медиа, ширина экрана">
+							<div class="docs__option-title">mediaQuery</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">mediaQuery</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Media Query - это число, указывающее на
+									ширину экрана, в которой должна
+									появиться возможность открытия меню.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="scrollLock, блокировка, скролл, заблокировать, лок, lock, block">
+							<div class="docs__option-title">scrollLock</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">scrollLock</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Scroll Lock - объект, в котором можно
+									указать 3 необязательных параметра:
+								</p>
+								<ul class="list-reset">
+									<li>
+										<code class="js-option">scrollLockArray</code>
+										- массив, в котором можно
+										перечислить все элементы, которым
+										будет присвоен класс из
+										<span class="js-mark">"</span><code class="js-option">scrollLockClass</code><span class="js-mark">"</span>. По
+										умолчанию -
+										<span class="js-function">[</span><code class="js-option"><i>header</i></code><span class="js-function">]</span>.
+									</li>
+
+									<li>
+										<code class="js-option">scrollLockClass</code>
+										- определяет класс, который будет
+										присвоен всем элементам, указанным в
+										<span class="js-mark">"</span><code class="js-option">scrollLockArray</code><span class="js-mark">"</span>
+										при открытии меню. По умолчанию -
+										<span class="js-mark">"</span><code class="js-class">scroll-locked</code><span class="js-mark">"</span>.
+									</li>
+									<li>
+										<code class="js-option">scrollLockDesktop</code>
+										- параметр, с помощью которого можно
+										отключить блокировку прокрутки
+										колесом мыши в пределах указанных в
+										<span class="js-mark">"</span><code class="js-option">scrollLockArray</code><span class="js-mark">"</span>
+										элементов.
+										<span class="js-mark">"</span><code class="js-option">headerScrollClass</code><span class="js-mark">"</span>. По
+										умолчанию -
+										<code class="js-boolean">true</code>.
+									</li>
+								</ul>
+								<p>
+									Значение
+									<code class="js-boolean">true</code>
+									у
+									<code class="js-option">scrollLock</code>
+									присвоит всем вышеперечисленным
+									параметрам значение по умолчанию.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="shouldOffsetHeader, высота шапки, шапка, высота, учет, учитывать, height, headerheight">
+							<div class="docs__option-title">
+								shouldOffsetHeader
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">shouldOffsetHeader</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Should Offset Header - это параметр,
+									после включения которого, при навигации
+									по якорным ссылкам, будет учитываться
+									высота шапки сайта.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="scrollMargin, отступ, скролл, маргин, мэрджин, марджин, внешний отступ, margin">
+							<div class="docs__option-title">
+								scrollMargin
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">scrollMargin</span><span class="js-mark">: </span><span class="js-number">0</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Scroll Margin - это число, с помощью
+									которого можно указать дополнительный
+									отступ между шапкой сайта и секцией при
+									навигации по якорным ссылкам.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="shouldSmoothScroll, планый, скролл, smooth">
+							<div class="docs__option-title">
+								shouldSmoothScroll
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">shouldSmoothScroll</span><span class="js-mark">: </span><span class="js-boolean">true</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Should Smooth Scroll - параметр, с
+									помощью которого включить / отключить
+									плавность прокрутки при навигации по
+									якорным ссылкам.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="mainElement, мейн, меин, основной, главный, meinElement">
+							<div class="docs__option-title">
+								mainElement
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">mainElement</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Main Element - этот параметр
+									предназначен для добавления отступа
+									элементу
+									<span class="js-mark">"</span>
+									<code class="js-class">main</code>
+									<span class="js-mark">"</span>, равному
+									высоте шапки сайта, когда она находится
+									в фиксированной позиции, или добавления
+									отступа элементу
+									<span class="js-mark">"</span>
+									<code class="js-class">header</code>
+									<span class="js-mark">"</span>, равному
+									<span class="js-mark">"</span>
+									<code class="js-option">mainElementScrollMargin</code>
+									<span class="js-mark">"</span> когда
+									позиция не фиксированная.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="mainElementScrollMargin, скролл, отступ, маргин, мэрджин, марджин, внешний отступ, margin, мейн, меин, основной, главный">
+							<div class="docs__option-title">
+								mainElementScrollMargin
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">mainElementScrollMargin</span><span class="js-mark">: </span><span class="js-number">0</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Main element scroll margin - этот
+									параметр предназначен для добавления
+									отступа между элементами
+									<span class="js-mark">"</span>
+									<code class="js-class">main</code>
+									<span class="js-mark">"</span>
+									и
+									<span class="js-mark">"</span>
+									<code class="js-class">header</code>
+									<span class="js-mark">"</span>.
+								</p>
+								<p>
+									<span class="docs__option-important">Важно:</span>
+									Данный параметр не будет работать, если
+									не указан <span class="js-mark">"</span><code class="js-option">mainElement</code><span class="js-mark">"</span>.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="menuItemActive, меню, элемент, активный, active, item">
+							<div class="docs__option-title">
+								menuItemActive
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">menuItemActive</span><span class="js-mark">: "</span><span class="js-class">active</span><span class="js-mark">",</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Класс, который будет присвоен активному
+									элементу меню, когда
+									<span class="js-mark">"</span><span class="js-option">scrollWatch</span><span class="js-mark">"</span> включен.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="menuOpenClass, меню, открытие, класс, открытое, open, class">
+							<div class="docs__option-title">
+								menuOpenClass
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">menuOpenClass</span><span class="js-mark">: "</span><span class="js-class">menu--open</span><span class="js-mark">",</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Класс, который будет присвоен элементу
+									меню, когда меню открыто.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="hideClass, скрытие, класс, скрытый, class, hide, хайд">
+							<div class="docs__option-title">hideClass</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">hideClass</span><span class="js-mark">: "</span><span class="js-class">visually-hidden</span><span class="js-mark">",</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Класс, который будет присвоен элементу
+									<span class="js-mark">"</span><span class="js-option">menuIcon</span><span class="js-mark">"</span>, когда
+									меню выключено, либо ширина экрана
+									больше значения, указанного в
+									<span class="js-mark">"</span><span class="js-option">mediaQuery</span><span class="js-mark">"</span>.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="menuIconActive, меню, иконка, активный, икон, актив, active, icon">
+							<div class="docs__option-title">
+								menuIconActive
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">menuIconActive</span><span class="js-mark">: "</span><span class="js-class">header__burger--active</span><span class="js-mark">",</span>
+								</code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Класс, который будет присвоен элементу
+									<span class="js-mark">"</span><span class="js-option">menuIcon</span><span class="js-mark">"</span>, когда
+									меню открыто.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="btn-up btn-up_hide"></div>
+		</main>
+		<footer class="footer">
+			<div class="footer__container">
+			</div>
+		</footer>
+	</div>
+	<script src="js/app.min.js?_v=20230809031952"></script>
+
+</body>
+
+</html>

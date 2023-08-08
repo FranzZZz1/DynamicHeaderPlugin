@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en" class="page iframe-page hero-iframe">
+
+<head>
+	<title>ChangableHeader</title>
+	<meta charset="UTF-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20230809031952" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="body iframe-body">
+	<div class="wrapper">
+		<header class="header secondary-header hero-iframe__header">
+			<div class="header__container">
+				<button class="header__burger visually-hidden btn-reset" tabindex="1">
+					<span></span>
+				</button>
+
+				<a class="header__logo">
+					<img src="img/dynamic-header/dynamic-header-logo.svg" alt="" />
+				</a>
+
+				<div class="header__menu-wrapper">
+					<nav class="header__menu">
+						<ul class="header__menu-list list-reset">
+							<li class="header__menu-item">
+								<a href="#hero-iframe__hero" class="header__menu-link" tabindex="2">Главная</a>
+							</li>
+							<li class="header__menu-item">
+								<a href="#hero-iframe__docs" class="header__menu-link" tabindex="4">Документация</a>
+							</li>
+							<li class="header__menu-item">
+								<a href="#hero-iframe__filling" class="header__menu-link">Протестировать</a>
+							</li>
+						</ul>
+					</nav>
+					<!-- <ul class="header__social list-reset">
+                            <li class="header__social-item">
+                                <a
+                                    href="https://t.me/slnest"
+                                    class="header__social-link header__social-link--pc"
+                                    tabindex="8"
+                                >
+                                    <svg
+                                        width="30px"
+                                        height="30px"
+                                        viewBox="0 0 100 100"
+                                        fill="none"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M50 100c27.614 0 50-22.386 50-50S77.614 0 50 0 0 22.386 0 50s22.386 50 50 50Zm21.977-68.056c.386-4.38-4.24-2.576-4.24-2.576-3.415 1.414-6.937 2.85-10.497 4.302-11.04 4.503-22.444 9.155-32.159 13.734-5.268 1.932-2.184 3.864-2.184 3.864l8.351 2.577c3.855 1.16 5.91-.129 5.91-.129l17.988-12.238c6.424-4.38 4.882-.773 3.34.773l-13.49 12.882c-2.056 1.804-1.028 3.35-.129 4.123 2.55 2.249 8.82 6.364 11.557 8.16.712.467 1.185.778 1.292.858.642.515 4.111 2.834 6.424 2.319 2.313-.516 2.57-3.479 2.57-3.479l3.083-20.226c.462-3.511.993-6.886 1.417-9.582.4-2.546.705-4.485.767-5.362Z"
+                                            fill="#ffffff"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="header__social-item">
+                                <a
+                                    href="#"
+                                    class="header__social-link header__social-link--mobile"
+                                    tabindex="9"
+                                >
+                                    <svg
+                                        width="30px"
+                                        height="30px"
+                                        viewBox="0 0 100 100"
+                                        fill="none"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M50 100c27.614 0 50-22.386 50-50S77.614 0 50 0 0 22.386 0 50s22.386 50 50 50Zm21.977-68.056c.386-4.38-4.24-2.576-4.24-2.576-3.415 1.414-6.937 2.85-10.497 4.302-11.04 4.503-22.444 9.155-32.159 13.734-5.268 1.932-2.184 3.864-2.184 3.864l8.351 2.577c3.855 1.16 5.91-.129 5.91-.129l17.988-12.238c6.424-4.38 4.882-.773 3.34.773l-13.49 12.882c-2.056 1.804-1.028 3.35-.129 4.123 2.55 2.249 8.82 6.364 11.557 8.16.712.467 1.185.778 1.292.858.642.515 4.111 2.834 6.424 2.319 2.313-.516 2.57-3.479 2.57-3.479l3.083-20.226c.462-3.511.993-6.886 1.417-9.582.4-2.546.705-4.485.767-5.362Z"
+                                            fill="#ffffff"
+                                        ></path>
+                                    </svg>
+                                    <span>Связаться с разработчиком</span>
+                                </a>
+                            </li>
+                        </ul> -->
+				</div>
+			</div>
+		</header>
+		<main class="main hero-iframe__main">
+			<section class="settings hero-iframe__settings" id="hero-iframe__hero">
+				<div class="container settings__container">
+					<h2 class="iframe-title settings__title">
+						Динамические параметры
+					</h2>
+					<div class="settings__checkboxes">
+						<div class="settings__accordion accordion js-accordion">
+							<section class="accordion__item">
+								<h2 class="accordion__headline accordion__title">
+									<label class="settings__checkbox-container">
+										<input type="checkbox" class="settings__checkbox input-control" data-type="checkbox" data-param="dynamic" data-value="true" />
+										<svg viewBox="0 0 21 18">
+											<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 18" id="tick-path">
+												<path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.25" fill="none" d="M5.22003 7.26C5.72003 7.76 7.57 9.7 8.67 11.45C12.2 6.05 15.65 3.5 19.19 1.69"></path>
+											</symbol>
+											<defs>
+												<mask id="tick"></mask>
+											</defs>
+
+											<path d="M18 9C18 10.4464 17.9036 11.8929 17.7589 13.1464C17.5179 15.6054 15.6054 17.5179 13.1625 17.7589C11.8929 17.9036 10.4464 18 9 18C7.55357 18 6.10714 17.9036 4.85357 17.7589C2.39464 17.5179 0.498214 15.6054 0.241071 13.1464C0.0964286 11.8929 0 10.4464 0 9C0 7.55357 0.0964286 6.10714 0.241071 4.8375C0.498214 2.39464 2.39464 0.482143 4.85357 0.241071C6.10714 0.0964286 7.55357 0 9 0C10.4464 0 11.8929 0.0964286 13.1625 0.241071C15.6054 0.482143 17.5179 2.39464 17.7589 4.8375C17.9036 6.10714 18 7.55357 18 9Z" mask="url(#tick)" fill="white"></path>
+										</svg>
+										<svg viewBox="0 0 11 11" class="lines">
+											<path d="M5.88086 5.89441L9.53504 4.26746"></path>
+											<path d="M5.5274 8.78838L9.45391 9.55161"></path>
+											<path d="M3.49371 4.22065L5.55387 0.79198"></path>
+										</svg>
+										<span class="settings__checkbox-text">Включить "dynamic"</span>
+									</label>
+									<button type="button" class="accordion__tab js-accordion-tab">
+										<span class="accordion__tabicon"></span>
+									</button>
+								</h2>
+								<div class="accordion__panel js-accordion-panel">
+									<div class="accordion__panel-content">
+										<p>
+											Данный параметр изменяет
+											поведение шапки сайта. Включив
+											его, пользователь может скрывать
+											шапку при прокрутке страницы
+											вниз, что позволяет увеличить
+											пространство для просмотра
+											контента на сайте. При прокрутке
+											страницы вверх, шапка
+											появляется, обеспечивая быстрый
+											доступ к навигации и другим
+											важным элементам интерфейса.
+											Этот параметр может быть
+											особенно полезен для сайтов,
+											которые хотят максимально
+											использовать место на экране и
+											обеспечить удобство навигации
+											для пользователей.
+										</p>
+									</div>
+								</div>
+							</section>
+
+							<section class="accordion__item">
+								<h2 class="accordion__headline accordion__title">
+									<label class="settings__checkbox-container">
+										<input type="checkbox" class="settings__checkbox input-control" data-type="checkbox" data-param="scrollWatch" data-value="true" />
+										<svg viewBox="0 0 21 18">
+											<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 18" id="tick-path">
+												<path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.25" fill="none" d="M5.22003 7.26C5.72003 7.76 7.57 9.7 8.67 11.45C12.2 6.05 15.65 3.5 19.19 1.69"></path>
+											</symbol>
+											<defs>
+												<mask id="tick"></mask>
+											</defs>
+
+											<path d="M18 9C18 10.4464 17.9036 11.8929 17.7589 13.1464C17.5179 15.6054 15.6054 17.5179 13.1625 17.7589C11.8929 17.9036 10.4464 18 9 18C7.55357 18 6.10714 17.9036 4.85357 17.7589C2.39464 17.5179 0.498214 15.6054 0.241071 13.1464C0.0964286 11.8929 0 10.4464 0 9C0 7.55357 0.0964286 6.10714 0.241071 4.8375C0.498214 2.39464 2.39464 0.482143 4.85357 0.241071C6.10714 0.0964286 7.55357 0 9 0C10.4464 0 11.8929 0.0964286 13.1625 0.241071C15.6054 0.482143 17.5179 2.39464 17.7589 4.8375C17.9036 6.10714 18 7.55357 18 9Z" mask="url(#tick)" fill="white"></path>
+										</svg>
+										<svg viewBox="0 0 11 11" class="lines">
+											<path d="M5.88086 5.89441L9.53504 4.26746"></path>
+											<path d="M5.5274 8.78838L9.45391 9.55161"></path>
+											<path d="M3.49371 4.22065L5.55387 0.79198"></path>
+										</svg>
+										<span class="settings__checkbox-text">Включить "scrollWatch"</span>
+									</label>
+									<button type="button" class="accordion__tab js-accordion-tab">
+										<span class="accordion__tabicon"></span>
+									</button>
+								</h2>
+								<div class="accordion__panel js-accordion-panel">
+									<div class="accordion__panel-content">
+										<p>
+											При использовании данного
+											параметра, пользователи смогут
+											увидеть, что элементы навигации
+											находятся в активном состоянии,
+											если соответствующая секция с
+											атрибутом "src" этого элемента
+											навигации попадет в поле зрения.
+											Класс "active" будет применен к
+											этим элементам навигации, чтобы
+											показать, на какой части сайта
+											они находятся. Это облегчает
+											навигацию пользователя по
+											странице, упрощая поиск нужной
+											информации и создавая более
+											удобный пользовательский опыт.
+										</p>
+									</div>
+								</div>
+							</section>
+
+							<section class="accordion__item">
+								<h2 class="accordion__headline accordion__title">
+									<label class="settings__checkbox-container">
+										<input type="checkbox" class="settings__checkbox input-control" data-type="checkbox" data-param="scrollLock" data-value="true" />
+										<svg viewBox="0 0 21 18">
+											<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 18" id="tick-path">
+												<path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.25" fill="none" d="M5.22003 7.26C5.72003 7.76 7.57 9.7 8.67 11.45C12.2 6.05 15.65 3.5 19.19 1.69"></path>
+											</symbol>
+											<defs>
+												<mask id="tick"></mask>
+											</defs>
+
+											<path d="M18 9C18 10.4464 17.9036 11.8929 17.7589 13.1464C17.5179 15.6054 15.6054 17.5179 13.1625 17.7589C11.8929 17.9036 10.4464 18 9 18C7.55357 18 6.10714 17.9036 4.85357 17.7589C2.39464 17.5179 0.498214 15.6054 0.241071 13.1464C0.0964286 11.8929 0 10.4464 0 9C0 7.55357 0.0964286 6.10714 0.241071 4.8375C0.498214 2.39464 2.39464 0.482143 4.85357 0.241071C6.10714 0.0964286 7.55357 0 9 0C10.4464 0 11.8929 0.0964286 13.1625 0.241071C15.6054 0.482143 17.5179 2.39464 17.7589 4.8375C17.9036 6.10714 18 7.55357 18 9Z" mask="url(#tick)" fill="white"></path>
+										</svg>
+										<svg viewBox="0 0 11 11" class="lines">
+											<path d="M5.88086 5.89441L9.53504 4.26746"></path>
+											<path d="M5.5274 8.78838L9.45391 9.55161"></path>
+											<path d="M3.49371 4.22065L5.55387 0.79198"></path>
+										</svg>
+										<span class="settings__checkbox-text">
+											Включить "scrollLock"
+										</span>
+									</label>
+									<button type="button" class="accordion__tab js-accordion-tab">
+										<span class="accordion__tabicon"></span>
+									</button>
+								</h2>
+								<div class="accordion__panel js-accordion-panel">
+									<div class="accordion__panel-content">
+										<p>
+											При использовании данного
+											параметра в Вашем проекте, Вы
+											можете указать массив элементов,
+											которым будет присвоен класс
+											"scroll-locked", в случае
+											открытия меню. Это предотвратит
+											возможность прокрутки страницы
+											пользователям, находящимся на
+											этих элементах.
+										</p>
+										<p>
+											Это может оказаться полезным для
+											предотвращения нежелательных
+											действий пользователей, которые
+											могут повлиять на работу Вашего
+											приложения.
+										</p>
+										<p>
+											Кроме того, данный параметр
+											обеспечивает максимальную
+											гибкость. Вы можете добавлять
+											или удалять элементы в массиве
+											"scrollLockArray" в зависимости
+											от Ваших потребностей.
+										</p>
+									</div>
+								</div>
+							</section>
+
+							<section class="accordion__item">
+								<h2 class="accordion__headline accordion__title">
+									<div class="settings__slider-container scroll-margin-control">
+										<label class="settings__slider-text" for="scroll-margin-slider">
+											scrollMargin:
+										</label>
+										<div class="settings__slider-wrapper">
+											<input type="range" id="scroll-margin-slider" class="settings__slider" min="0" max="100" value="0" data-param="scrollMargin" />
+											<span class="settings__slider-value" id="scroll-margin-value">
+												0
+											</span>
+										</div>
+									</div>
+									<button type="button" class="accordion__tab js-accordion-tab">
+										<span class="accordion__tabicon"></span>
+									</button>
+								</h2>
+								<div class="accordion__panel js-accordion-panel">
+									<div class="accordion__panel-content">
+										<p>
+											Lorem ipsum dolor, sit amet
+											consectetur adipisicing elit.
+											Iste, magni obcaecati. Enim
+											fugiat ea voluptatem magni
+											doloribus excepturi, odit
+											mollitia itaque eveniet
+											laudantium neque quasi culpa
+											exercitationem sapiente!
+											Corporis, praesentium!
+										</p>
+									</div>
+								</div>
+							</section>
+
+							<section class="accordion__item">
+								<h2 class="accordion__headline accordion__title">
+									<div class="settings__slider-container scroll-margin-control">
+										<label class="settings__slider-text" for="main-scroll-margin-slider">
+											mainMargin:
+										</label>
+										<div class="settings__slider-wrapper">
+											<input type="range" id="main-scroll-margin-slider" class="settings__slider" min="0" max="100" value="0" data-param="mainElementScrollMargin" />
+											<span class="settings__slider-value" id="main-scroll-margin-value">
+												0
+											</span>
+										</div>
+									</div>
+									<button type="button" class="accordion__tab js-accordion-tab">
+										<span class="accordion__tabicon"></span>
+									</button>
+								</h2>
+								<div class="accordion__panel js-accordion-panel">
+									<div class="accordion__panel-content">
+										<p>
+											Lorem ipsum dolor, sit amet
+											consectetur adipisicing elit.
+											Iste, magni obcaecati. Enim
+											fugiat ea voluptatem magni
+											doloribus excepturi, odit
+											mollitia itaque eveniet
+											laudantium neque quasi culpa
+											exercitationem sapiente!
+											Corporis, praesentium!
+										</p>
+									</div>
+								</div>
+							</section>
+						</div>
+
+						<!-- <label class="settings__checkbox-container">
+                                <input
+                                    type="checkbox"
+                                    class="settings__checkbox input-control"
+                                    data-type="checkbox"
+                                    data-param="dynamic"
+                                    data-value="true"
+                                />
+                                <svg viewBox="0 0 21 18">
+                                    <symbol
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 21 18"
+                                        id="tick-path"
+                                    >
+                                        <path
+                                            stroke-linejoin="round"
+                                            stroke-linecap="round"
+                                            stroke-width="2.25"
+                                            fill="none"
+                                            d="M5.22003 7.26C5.72003 7.76 7.57 9.7 8.67 11.45C12.2 6.05 15.65 3.5 19.19 1.69"
+                                        ></path>
+                                    </symbol>
+                                    <defs>
+                                        <mask id="tick"></mask>
+                                    </defs>
+
+                                    <path
+                                        d="M18 9C18 10.4464 17.9036 11.8929 17.7589 13.1464C17.5179 15.6054 15.6054 17.5179 13.1625 17.7589C11.8929 17.9036 10.4464 18 9 18C7.55357 18 6.10714 17.9036 4.85357 17.7589C2.39464 17.5179 0.498214 15.6054 0.241071 13.1464C0.0964286 11.8929 0 10.4464 0 9C0 7.55357 0.0964286 6.10714 0.241071 4.8375C0.498214 2.39464 2.39464 0.482143 4.85357 0.241071C6.10714 0.0964286 7.55357 0 9 0C10.4464 0 11.8929 0.0964286 13.1625 0.241071C15.6054 0.482143 17.5179 2.39464 17.7589 4.8375C17.9036 6.10714 18 7.55357 18 9Z"
+                                        mask="url(#tick)"
+                                        fill="white"
+                                    ></path>
+                                </svg>
+                                <svg viewBox="0 0 11 11" class="lines">
+                                    <path
+                                        d="M5.88086 5.89441L9.53504 4.26746"
+                                    ></path>
+                                    <path
+                                        d="M5.5274 8.78838L9.45391 9.55161"
+                                    ></path>
+                                    <path
+                                        d="M3.49371 4.22065L5.55387 0.79198"
+                                    ></path>
+                                </svg>
+                                <span class="settings__checkbox-text"
+                                    >Включить "Dynamic"</span
+                                >
+                            </label> -->
+
+						<!-- <label class="settings__checkbox-container">
+                                <input
+                                    type="checkbox"
+                                    class="settings__checkbox input-control"
+                                    data-type="checkbox"
+                                    data-param="scrollWatch"
+                                    data-value="true"
+                                />
+                                <svg viewBox="0 0 21 18">
+                                    <symbol
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 21 18"
+                                        id="tick-path"
+                                    >
+                                        <path
+                                            stroke-linejoin="round"
+                                            stroke-linecap="round"
+                                            stroke-width="2.25"
+                                            fill="none"
+                                            d="M5.22003 7.26C5.72003 7.76 7.57 9.7 8.67 11.45C12.2 6.05 15.65 3.5 19.19 1.69"
+                                        ></path>
+                                    </symbol>
+                                    <defs>
+                                        <mask id="tick"></mask>
+                                    </defs>
+
+                                    <path
+                                        d="M18 9C18 10.4464 17.9036 11.8929 17.7589 13.1464C17.5179 15.6054 15.6054 17.5179 13.1625 17.7589C11.8929 17.9036 10.4464 18 9 18C7.55357 18 6.10714 17.9036 4.85357 17.7589C2.39464 17.5179 0.498214 15.6054 0.241071 13.1464C0.0964286 11.8929 0 10.4464 0 9C0 7.55357 0.0964286 6.10714 0.241071 4.8375C0.498214 2.39464 2.39464 0.482143 4.85357 0.241071C6.10714 0.0964286 7.55357 0 9 0C10.4464 0 11.8929 0.0964286 13.1625 0.241071C15.6054 0.482143 17.5179 2.39464 17.7589 4.8375C17.9036 6.10714 18 7.55357 18 9Z"
+                                        mask="url(#tick)"
+                                        fill="white"
+                                    ></path>
+                                </svg>
+                                <svg viewBox="0 0 11 11" class="lines">
+                                    <path
+                                        d="M5.88086 5.89441L9.53504 4.26746"
+                                    ></path>
+                                    <path
+                                        d="M5.5274 8.78838L9.45391 9.55161"
+                                    ></path>
+                                    <path
+                                        d="M3.49371 4.22065L5.55387 0.79198"
+                                    ></path>
+                                </svg>
+                                <span class="settings__checkbox-text"
+                                    >Включить "ScrollWatch"</span
+                                >
+                            </label> -->
+
+						<!-- <label class="settings__checkbox-container">
+                                <input
+                                    type="checkbox"
+                                    class="settings__checkbox input-control"
+                                    data-type="checkbox"
+                                    data-param="scrollLock"
+                                    data-value="true"
+                                />
+                                <svg viewBox="0 0 21 18">
+                                    <symbol
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 21 18"
+                                        id="tick-path"
+                                    >
+                                        <path
+                                            stroke-linejoin="round"
+                                            stroke-linecap="round"
+                                            stroke-width="2.25"
+                                            fill="none"
+                                            d="M5.22003 7.26C5.72003 7.76 7.57 9.7 8.67 11.45C12.2 6.05 15.65 3.5 19.19 1.69"
+                                        ></path>
+                                    </symbol>
+                                    <defs>
+                                        <mask id="tick"></mask>
+                                    </defs>
+
+                                    <path
+                                        d="M18 9C18 10.4464 17.9036 11.8929 17.7589 13.1464C17.5179 15.6054 15.6054 17.5179 13.1625 17.7589C11.8929 17.9036 10.4464 18 9 18C7.55357 18 6.10714 17.9036 4.85357 17.7589C2.39464 17.5179 0.498214 15.6054 0.241071 13.1464C0.0964286 11.8929 0 10.4464 0 9C0 7.55357 0.0964286 6.10714 0.241071 4.8375C0.498214 2.39464 2.39464 0.482143 4.85357 0.241071C6.10714 0.0964286 7.55357 0 9 0C10.4464 0 11.8929 0.0964286 13.1625 0.241071C15.6054 0.482143 17.5179 2.39464 17.7589 4.8375C17.9036 6.10714 18 7.55357 18 9Z"
+                                        mask="url(#tick)"
+                                        fill="white"
+                                    ></path>
+                                </svg>
+                                <svg viewBox="0 0 11 11" class="lines">
+                                    <path
+                                        d="M5.88086 5.89441L9.53504 4.26746"
+                                    ></path>
+                                    <path
+                                        d="M5.5274 8.78838L9.45391 9.55161"
+                                    ></path>
+                                    <path
+                                        d="M3.49371 4.22065L5.55387 0.79198"
+                                    ></path>
+                                </svg>
+                                <span class="settings__checkbox-text"
+                                    >Enable ScrollLock</span
+                                >
+                            </label> -->
+
+						<!-- <div
+                                class="settings__slider-container scroll-margin-control"
+                            >
+                                <label
+                                    class="settings__slider-text"
+                                    for="scroll-margin-slider"
+                                >
+                                    scrollMargin:
+                                </label>
+                                <div class="settings__slider-wrapper">
+                                    <input
+                                        type="range"
+                                        id="scroll-margin-slider"
+                                        class="settings__slider"
+                                        min="0"
+                                        max="100"
+                                        value="0"
+                                        data-param="scrollMargin"
+                                    />
+                                    <span
+                                        class="settings__slider-value"
+                                        id="scroll-margin-value"
+                                    >
+                                        0
+                                    </span>
+                                </div>
+                            </div> -->
+
+						<!-- <div
+                                class="settings__slider-container scroll-margin-control"
+                            >
+                                <label
+                                    class="settings__slider-text"
+                                    for="main-scroll-margin-slider"
+                                >
+                                    mainMargin:
+                                </label>
+                                <div class="settings__slider-wrapper">
+                                    <input
+                                        type="range"
+                                        id="main-scroll-margin-slider"
+                                        class="settings__slider"
+                                        min="0"
+                                        max="100"
+                                        value="0"
+                                        data-param="mainElementScrollMargin"
+                                    />
+                                    <span
+                                        class="settings__slider-value"
+                                        id="main-scroll-margin-value"
+                                    >
+                                        0
+                                    </span>
+                                </div>
+                            </div> -->
+					</div>
+				</div>
+			</section>
+
+			<section class="hero-iframe__docs" id="hero-iframe__docs">
+				<div class="container docs__container">
+					<div class="iframe-title docs__title">
+						Пример вызова функции
+					</div>
+					<code>
+						<pre>
+<span class="js-function">dynamicHeaderControl</span><span class="js-function-bracket">(</span><span class="js-mark">"</span><span class="js-class">.header</span><span class="js-mark">", </span><span class="js-bracket">{</span>
+   <span class="js-option">menuBody</span><span class="js-mark">: "</span><span class="js-class">.header__menu-body</span><span class="js-mark">",</span>
+   <span class="js-option">menuIcon</span><span class="js-mark">: "</span><span class="js-class">.header__burger</span><span class="js-mark">",</span>
+   <span class="js-option">menuItem</span><span class="js-mark">: "</span><span class="js-class">.header__menu-item</span><span class="js-mark">",</span>
+   <span class="js-option">menuLink</span><span class="js-mark">: "</span><span class="js-class">.header__menu-link</span><span class="js-mark">",</span>
+   <span class="js-option">dynamic</span><span class="js-mark">: </span><span class="js-boolean">true</span><span class="js-mark">,</span>
+   <span class="js-option">mainElement</span><span class="js-mark">: "</span><span class="js-class">.main</span><span class="js-mark">",</span>
+   <span class="js-option">menu</span><span class="js-mark">: </span><span class="js-boolean">true</span><span class="js-mark">,</span>
+   <span class="js-option">mediaQuery</span><span class="js-mark">: </span><span class="js-number">504</span><span class="js-mark">,</span>
+   <span class="js-option">consoleMessages</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span>
+   <span class="js-option">shouldOffsetHeader</span><span class="js-mark">: </span><span class="js-boolean">true</span><span class="js-mark">,</span>
+   <span class="js-option">shouldSmoothScroll</span><span class="js-mark">: </span><span class="js-boolean">true</span><span class="js-mark">,</span>
+<span class="js-bracket">}</span><span class="js-function-bracket">)</span><span class="js-semicolon">;</span>
+</pre>
+					</code>
+				</div>
+			</section>
+
+			<section class="dh-filling hero-iframe__filling" id="hero-iframe__filling">
+				<div class="container dh-filling__container">
+					<h2 class="iframe-title dh-filling__title">
+						Dynamic Header
+					</h2>
+					<div class="dh-filling__text">
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+						<p>Текст для демонстрации работы Dynamic Header</p>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+	<script src="js/app.min.js?_v=20230809031952"></script>
+
+</body>
+
+</html>
