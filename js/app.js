@@ -5170,7 +5170,9 @@
                                 let scrollOptions = {};
                                 scrollOptions.behavior = shouldSmoothScroll ? "smooth" : "auto";
                                 if (shouldOffsetHeader) {
-                                    if (!dynamic || dynamic && anchorLinks.length > 0 && link == anchorLinks[0]) if (headerPosition == "fixed") if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - headerHeight - scrollMargin; else if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin; else if (dynamic) if (targetElement.getBoundingClientRect().y < 0) scrollOptions.top = offsetTop - headerHeight - scrollMargin; else scrollOptions.top = offsetTop - scrollMargin;
+                                    if (!dynamic || dynamic && anchorLinks.length > 0 && link == anchorLinks[0]) if (headerPosition == "fixed") if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - headerHeight - scrollMargin; else if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin; else if (dynamic) if (
+                                    //! experimental "+ headerHeight"
+                                    targetElement.getBoundingClientRect().y < 0 + headerHeight) scrollOptions.top = offsetTop - headerHeight - scrollMargin; else scrollOptions.top = offsetTop - scrollMargin;
                                 } else if (dynamic) if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin; else if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin;
                                 window.scrollBy(scrollOptions);
                             }
@@ -5808,7 +5810,7 @@
                     }), 350);
                     let targetTop;
                     const dynamic = true;
-                    if (!dynamic) targetTop = targetItem.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10; else if (targetItem.getBoundingClientRect().y < 0) targetTop = targetItem.getBoundingClientRect().top + window.pageYOffset - headerHeight - 30; else targetTop = targetItem.getBoundingClientRect().top + window.pageYOffset - 30;
+                    if (!dynamic) targetTop = targetItem.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10; else if (targetItem.getBoundingClientRect().y < 0 + headerHeight) targetTop = targetItem.getBoundingClientRect().top + window.pageYOffset - headerHeight - 30; else targetTop = targetItem.getBoundingClientRect().top + window.pageYOffset - 30;
                     window.scrollTo({
                         top: targetTop,
                         behavior: "smooth"
