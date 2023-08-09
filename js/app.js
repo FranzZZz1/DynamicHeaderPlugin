@@ -4890,16 +4890,6 @@
                         }
                     }
                 });
-                document.addEventListener("DOMContentLoaded", (function() {
-                    const previewContainer = document.querySelector(".preview__inner");
-                    const previewSlider = previewContainer.querySelector(".preview__slider");
-                    const previewButtons = previewContainer.querySelector(".preview__buttons");
-                    const mql = window.matchMedia("(max-width: 576px)");
-                    if (mql.matches) previewContainer.insertBefore(previewSlider, previewButtons); else previewContainer.insertBefore(previewButtons, previewSlider);
-                    mql.addEventListener("change", (function() {
-                        if (mql.matches) previewContainer.insertBefore(previewSlider, previewButtons); else previewContainer.insertBefore(previewButtons, previewSlider);
-                    }));
-                }));
             }
             if (document.querySelector(".presentation__slider")) {
                 let swiperSpeed = 600;
@@ -4937,6 +4927,16 @@
         }
         window.addEventListener("load", (function(e) {
             initSliders();
+        }));
+        if (document.querySelector(".preview__slider")) document.addEventListener("DOMContentLoaded", (function() {
+            const previewContainer = document.querySelector(".preview__inner");
+            const previewSlider = previewContainer.querySelector(".preview__slider");
+            const previewButtons = previewContainer.querySelector(".preview__buttons");
+            const mql = window.matchMedia("(max-width: 576px)");
+            if (mql.matches) previewContainer.insertBefore(previewSlider, previewButtons); else previewContainer.insertBefore(previewButtons, previewSlider);
+            mql.addEventListener("change", (function() {
+                if (mql.matches) previewContainer.insertBefore(previewSlider, previewButtons); else previewContainer.insertBefore(previewButtons, previewSlider);
+            }));
         }));
         const dynamicHeader = function(header, options = {}) {
             if (!document.querySelector("header")) return;
@@ -5157,15 +5157,23 @@
                     const handleHeightAccounting = function(event) {
                         event.preventDefault();
                         const targetId = link.getAttribute("href");
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            const offsetTop = targetElement.getBoundingClientRect().top;
-                            let scrollOptions = {};
-                            scrollOptions.behavior = shouldSmoothScroll ? "smooth" : "auto";
-                            if (shouldOffsetHeader) {
-                                if (!dynamic || dynamic && anchorLinks.length > 0 && link == anchorLinks[0]) if (headerPosition == "fixed") if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - headerHeight - scrollMargin; else if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin; else if (dynamic) if (targetElement.getBoundingClientRect().y < 0) scrollOptions.top = offsetTop - headerHeight - scrollMargin; else scrollOptions.top = offsetTop - scrollMargin;
-                            } else if (dynamic) if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin; else if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin;
-                            window.scrollBy(scrollOptions);
+                        if (targetId === "#") {
+                            const scrollOptions = {
+                                top: 0,
+                                behavior: shouldSmoothScroll ? "smooth" : "auto"
+                            };
+                            window.scrollTo(scrollOptions);
+                        } else {
+                            const targetElement = document.querySelector(targetId);
+                            if (targetElement) {
+                                const offsetTop = targetElement.getBoundingClientRect().top;
+                                let scrollOptions = {};
+                                scrollOptions.behavior = shouldSmoothScroll ? "smooth" : "auto";
+                                if (shouldOffsetHeader) {
+                                    if (!dynamic || dynamic && anchorLinks.length > 0 && link == anchorLinks[0]) if (headerPosition == "fixed") if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - headerHeight - scrollMargin; else if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin; else if (dynamic) if (targetElement.getBoundingClientRect().y < 0) scrollOptions.top = offsetTop - headerHeight - scrollMargin; else scrollOptions.top = offsetTop - scrollMargin;
+                                } else if (dynamic) if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin; else if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin;
+                                window.scrollBy(scrollOptions);
+                            }
                         }
                     };
                     if (!headerHeightEventAdded) attachEvent(link, "click", handleHeightAccounting);
@@ -5583,7 +5591,6 @@
                 }));
             }));
         }
-        setupCheckboxEventHandlers();
         const isInIframe = window !== window.top;
         const searchDocs = function() {
             const searchInput = document.getElementById("searchInput");
@@ -5615,6 +5622,10 @@
                         searchInput.value = selectedSuggestion;
                         searchSuggestionsList.style.display = "none";
                     }));
+                    suggestionLink.addEventListener("touchstart", (event => {
+                        selectedSuggestion = event.target.textContent;
+                        suggestionLink.focus();
+                    }));
                     suggestionItem.appendChild(suggestionLink);
                     searchSuggestionsList.appendChild(suggestionItem);
                 }));
@@ -5632,6 +5643,10 @@
                             navigateToItem(selectedSuggestion);
                             searchInput.value = selectedSuggestion;
                             searchSuggestionsList.style.display = "none";
+                        }));
+                        recentSuggestionLink.addEventListener("touchstart", (event => {
+                            selectedSuggestion = event.target.textContent;
+                            recentSuggestionLink.focus();
                         }));
                         recentSuggestionItem.appendChild(recentSuggestionLink);
                         recentSuggestionsContainer.appendChild(recentSuggestionItem);
@@ -5653,6 +5668,10 @@
                         navigateToItem(selectedSuggestion);
                         searchInput.value = selectedSuggestion;
                         searchSuggestionsList.style.display = "none";
+                    }));
+                    suggestionLink.addEventListener("touchstart", (event => {
+                        selectedSuggestion = event.target.textContent;
+                        suggestionLink.focus();
                     }));
                     suggestionItem.appendChild(suggestionLink);
                     searchSuggestionsList.appendChild(suggestionItem);
@@ -5808,7 +5827,11 @@
                 const container = document.querySelector(".container");
                 const containerStyles = window.getComputedStyle(container);
                 const containerPadding = containerStyles.getPropertyValue("--container-padding");
-                myBtnUp.style.right = `${window.innerWidth - 17 - container.getBoundingClientRect().right + +containerPadding}px`;
+                const paddingRight = () => {
+                    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+                    myBtnUp.style.right = `${window.innerWidth - container.getBoundingClientRect().right + scrollbarWidth + +containerPadding}px`;
+                };
+                paddingRight();
             };
             const btnUp = {
                 el: myBtnUp,
@@ -5838,6 +5861,7 @@
         };
         window.addEventListener("load", (function() {
             initHeaders();
+            setupCheckboxEventHandlers();
             if (isInIframe || !document.querySelector(".docs__content")) return;
             searchDocs();
             new masonry(".docs__content", {
