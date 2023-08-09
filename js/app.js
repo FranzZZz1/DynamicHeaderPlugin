@@ -5829,7 +5829,7 @@
                 const containerPadding = containerStyles.getPropertyValue("--container-padding");
                 const paddingRight = () => {
                     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-                    myBtnUp.style.right = `${window.innerWidth - container.getBoundingClientRect().right + scrollbarWidth + +containerPadding}px`;
+                    myBtnUp.style.right = `${window.innerWidth - container.getBoundingClientRect().right - scrollbarWidth + +containerPadding}px`;
                 };
                 paddingRight();
             };
