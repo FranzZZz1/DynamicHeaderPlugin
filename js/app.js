@@ -5627,7 +5627,9 @@
                     suggestionLink.addEventListener("touchstart", (event => {
                         selectedSuggestion = event.target.textContent;
                         suggestionLink.focus();
-                    }));
+                    }), {
+                        passive: false
+                    });
                     suggestionItem.appendChild(suggestionLink);
                     searchSuggestionsList.appendChild(suggestionItem);
                 }));
@@ -5649,7 +5651,9 @@
                         recentSuggestionLink.addEventListener("touchstart", (event => {
                             selectedSuggestion = event.target.textContent;
                             recentSuggestionLink.focus();
-                        }));
+                        }), {
+                            passive: false
+                        });
                         recentSuggestionItem.appendChild(recentSuggestionLink);
                         recentSuggestionsContainer.appendChild(recentSuggestionItem);
                     }));
@@ -5674,7 +5678,9 @@
                     suggestionLink.addEventListener("touchstart", (event => {
                         selectedSuggestion = event.target.textContent;
                         suggestionLink.focus();
-                    }));
+                    }), {
+                        passive: false
+                    });
                     suggestionItem.appendChild(suggestionLink);
                     searchSuggestionsList.appendChild(suggestionItem);
                 }));
