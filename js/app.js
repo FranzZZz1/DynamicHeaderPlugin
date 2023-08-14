@@ -4944,7 +4944,7 @@
                 console.error("header selector/tag required");
                 return;
             }
-            let {menuIcon = ".header__burger", menuBody = ".header__menu-wrapper", menuItem = ".header__menu-item", menuLink = ".header__menu-link", shouldMenuOffsetHeader = false, pageLock = false, pageLockClass = "lock", menu = true, scrollWatch = false, headerScroll = false, dynamic = false, mediaQuery = false, scrollLock = false, shouldScrollOffsetHeader = false, shouldSmoothScroll = true, scrollMargin = 0, mainElement = false, mainElementScrollMargin = 0, menuItemActive = "active", menuOpenClass = "menu--open", hideClass = "visually-hidden", menuIconActive = "header__burger--active", on} = options;
+            let {menuIcon = ".header__burger", menuBody = ".header__menu-wrapper", menuItem = ".header__menu-item", menuLink = ".header__menu-link", shouldMenuOffsetHeader = false, pageLock = false, pageLockClass = "lock", pageLockPadding = false, menu = true, scrollWatch = false, headerScroll = false, dynamic = false, mediaQuery = false, scrollLock = false, shouldScrollOffsetHeader = false, shouldSmoothScroll = true, scrollMargin = 0, mainElement = false, mainElementScrollMargin = 0, menuItemActive = "active", menuOpenClass = "menu--open", hideClass = "visually-hidden", menuIconActive = "header__burger--active", on} = options;
             const headerElem = document.querySelector(header);
             if (!headerElem) {
                 console.error(`Не найден элемент с селектором "${header}"`);
@@ -5000,6 +5000,26 @@
                     if (pageLock) document.documentElement.classList.add(pageLockClass);
                 }
             };
+            const pageLockObserver = function() {
+                if (!pageLockPadding || !pageLock) return;
+                const classToTrack = pageLockClass;
+                let scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+                const updateScrollbarWidth = () => {
+                    scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+                };
+                const mutationObserver = new MutationObserver(((mutationsList, observer) => {
+                    for (const mutation of mutationsList) if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                        const currentClass = document.documentElement.className;
+                        if (currentClass.includes(classToTrack)) document.body.style.paddingRight = `${scrollbarWidth}px`; else document.body.style.paddingRight = 0;
+                    }
+                }));
+                mutationObserver.observe(document.documentElement, {
+                    attributes: true
+                });
+                const resizeObserver = new ResizeObserver(updateScrollbarWidth);
+                resizeObserver.observe(document.documentElement);
+            };
+            pageLockObserver();
             const headerMenuOpen = function() {
                 if (!menu) return;
                 menuState(stateOpen);

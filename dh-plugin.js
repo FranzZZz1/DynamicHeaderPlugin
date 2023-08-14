@@ -14,7 +14,8 @@ export const dynamicHeader = function (header, options = {}) {
         menuLink = ".header__menu-link",
         shouldMenuOffsetHeader = false,
         pageLock = false,
-		pageLockClass = "lock",
+        pageLockClass = "lock",
+        pageLockPadding = false,
         menu = true,
         scrollWatch = false,
         headerScroll = false,
@@ -130,6 +131,54 @@ export const dynamicHeader = function (header, options = {}) {
             }
         }
     };
+
+    const pageLockObserver = function () {
+        if (!pageLockPadding || !pageLock) return;
+        const classToTrack = pageLockClass;
+        let scrollbarWidth =
+            window.innerWidth - document.documentElement.clientWidth;
+
+        // Функция для обновления scrollbarWidth
+        const updateScrollbarWidth = () => {
+            scrollbarWidth =
+                window.innerWidth - document.documentElement.clientWidth;
+        };
+
+        // Создаем новый экземпляр MutationObserver и передаем ему функцию-обработчик
+        const mutationObserver = new MutationObserver(
+            (mutationsList, observer) => {
+                // Проходимся по списку мутаций
+                for (const mutation of mutationsList) {
+                    // Проверяем, что это мутация атрибута класса
+                    if (
+                        mutation.type === "attributes" &&
+                        mutation.attributeName === "class"
+                    ) {
+                        // Получаем текущие классы элемента documentElement
+                        const currentClass = document.documentElement.className;
+
+                        if (currentClass.includes(classToTrack)) {
+                            document.body.style.paddingRight = `${scrollbarWidth}px`;
+                        } else {
+                            document.body.style.paddingRight = 0;
+                        }
+                    }
+                }
+            }
+        );
+
+        // Настраиваем наблюдение за изменениями на элементе documentElement
+        mutationObserver.observe(document.documentElement, {
+            attributes: true,
+        });
+
+        // Создаем новый экземпляр ResizeObserver и передаем ему функцию-обработчик
+        const resizeObserver = new ResizeObserver(updateScrollbarWidth);
+
+        // Начинаем наблюдение за изменениями размера окна
+        resizeObserver.observe(document.documentElement);
+    };
+    pageLockObserver();
 
     const headerMenuOpen = function () {
         if (!menu) {
