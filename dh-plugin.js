@@ -120,6 +120,7 @@ export const dynamicHeader = function (header, options = {}) {
             if (pageLock) {
                 document.documentElement.classList.remove(pageLockClass);
             }
+            attachEvent(window, "resize", stateHide);
         } else {
             menuBodyElem.style.cssText = state;
 
@@ -129,6 +130,7 @@ export const dynamicHeader = function (header, options = {}) {
             if (pageLock) {
                 document.documentElement.classList.add(pageLockClass);
             }
+            window.removeEventListener("resize", stateHide);
         }
     };
 

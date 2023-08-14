@@ -4994,10 +4994,12 @@
                     state();
                     if (menuIconActive) menuIconElem.classList.remove(menuIconActive);
                     if (pageLock) document.documentElement.classList.remove(pageLockClass);
+                    attachEvent(window, "resize", stateHide);
                 } else {
                     menuBodyElem.style.cssText = state;
                     if (menuIconActive) menuIconElem.classList.add(menuIconActive);
                     if (pageLock) document.documentElement.classList.add(pageLockClass);
+                    window.removeEventListener("resize", stateHide);
                 }
             };
             const pageLockObserver = function() {
