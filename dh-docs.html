@@ -6,7 +6,7 @@
 	<meta charset="UTF-8" />
 	<meta name="format-detection" content="telephone=no" />
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20230809220918" />
+	<link rel="stylesheet" href="css/style.min.css?_v=20230814201551" />
 	<link rel="shortcut icon" href="favicon.ico" />
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -473,13 +473,13 @@
 							</div>
 						</div>
 
-						<div class="docs__option docs__option-size" data-content="shouldOffsetHeader, высота шапки, шапка, высота, учет, учитывать, height, headerheight">
+						<div class="docs__option docs__option-size" data-content="shouldScrollOffsetHeader, высота шапки, шапка, высота, учет, учитывать, height, headerheight, scroll, скролл">
 							<div class="docs__option-title">
-								shouldOffsetHeader
+								shouldScrollOffsetHeader
 							</div>
 							<div class="docs__option-media">
 								<code>
-									<span class="js-option">shouldOffsetHeader</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+									<span class="js-option">shouldScrollOffsetHeader</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
 							</div>
 							<div class="docs__option-text">
 								<p>
@@ -508,6 +508,23 @@
 							</div>
 						</div>
 
+						<div class="docs__option docs__option-size" data-content="shouldMenuOffsetHeader, высота шапки, шапка, высота, учет, учитывать, height, headerheight, menu, меню">
+							<div class="docs__option-title">
+								shouldMenuOffsetHeader
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">shouldMenuOffsetHeader</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Параметр, после включения которого меню
+									будет открываться с учетом размера шапки
+									сайта.
+								</p>
+							</div>
+						</div>
+
 						<div class="docs__option docs__option-size" data-content="shouldSmoothScroll, планый, скролл, smooth">
 							<div class="docs__option-title">
 								shouldSmoothScroll
@@ -521,6 +538,66 @@
 									Параметр, с помощью которого включить /
 									отключить плавность прокрутки при
 									навигации по якорным ссылкам.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="pageLock, блокировка, lock, page lock, page, страница">
+							<div class="docs__option-title">pageLock</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">pageLock</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Параметр, включив который, при открытии
+									меню к тегу
+									<code class="js-option">html</code>
+									будет присваиваться класс
+									<span class="js-mark">"</span><code class="js-class">lock</code><span class="js-mark">"</span>, когда
+									меню открыто. <br />
+									Название класса можно изменить с помощью
+									параметра <span class="js-mark">"</span><code class="js-option">pageLockClass</code><span class="js-mark">"</span>.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="pageLockClass, блокировка, lock, page lock, page, страница, pageLockClass, класс, class">
+							<div class="docs__option-title">
+								pageLockClass
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">pageLockClass</span><span class="js-mark">: </span>
+									<span class="js-mark">"</span><span class="js-class">lock</span><span class="js-mark">"</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Класс, который будет присваиваться тегу
+									<code class="js-option">html</code>,
+									когда меню открыто и
+									<code><span class="js-option">pageLock</span><span class="js-mark">: </span><span class="js-boolean">true</span></code>.
+								</p>
+							</div>
+						</div>
+
+						<div class="docs__option docs__option-size" data-content="pageLockPadding, блокировка, lock, page lock, page, страница, паддинг, padding, отступ">
+							<div class="docs__option-title">
+								pageLockPadding
+							</div>
+							<div class="docs__option-media">
+								<code>
+									<span class="js-option">pageLockPadding</span><span class="js-mark">: </span><span class="js-boolean">false</span><span class="js-mark">,</span></code>
+							</div>
+							<div class="docs__option-text">
+								<p>
+									Параметр, включив который, при открытии
+									меню к тегу
+									<code class="js-option">body</code>
+									будет присваиваться css-свойство -
+									<span class="js-mark">"</span><code class="js-option">padding-right</code><span class="js-mark">"</span>,
+									значение которого будет пропорционально
+									ширине полосы прокрутки.
 								</p>
 							</div>
 						</div>
@@ -657,7 +734,7 @@
 		</main>
 		<footer class="footer">
 			<div class="footer__container">
-				<h2 class="footer__title">front.franzzz@gmail.com</h2>
+				<h2 class="footer__title"><a href="mailto:front.franzzz@gmail.com">front.franzzz@gmail.com</a></h2>
 				<p class="footer__text">
 					Всегда готов сотрудничать, когда у меня есть время. <br> Я надеюсь
 					продолжить свою карьеру, разрушив пространство социальных продуктов. <br>
@@ -690,7 +767,7 @@
 		</footer>
 
 	</div>
-	<script src="js/app.min.js?_v=20230809220918"></script>
+	<script src="js/app.min.js?_v=20230814201551"></script>
 
 </body>
 

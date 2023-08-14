@@ -4944,7 +4944,7 @@
                 console.error("header selector/tag required");
                 return;
             }
-            let {menuIcon = ".header__burger", menuBody = ".header__menu-wrapper", menuItem = ".header__menu-item", menuLink = ".header__menu-link", menu = true, scrollWatch = false, headerScroll = false, dynamic = false, mediaQuery = false, scrollLock = false, shouldOffsetHeader = false, shouldSmoothScroll = true, scrollMargin = 0, mainElement = false, mainElementScrollMargin = 0, menuItemActive = "active", menuOpenClass = "menu--open", hideClass = "visually-hidden", menuIconActive = "header__burger--active", consoleMessages = false, on} = options;
+            let {menuIcon = ".header__burger", menuBody = ".header__menu-wrapper", menuItem = ".header__menu-item", menuLink = ".header__menu-link", shouldMenuOffsetHeader = false, pageLock = false, pageLockClass = "lock", menu = true, scrollWatch = false, headerScroll = false, dynamic = false, mediaQuery = false, scrollLock = false, shouldScrollOffsetHeader = false, shouldSmoothScroll = true, scrollMargin = 0, mainElement = false, mainElementScrollMargin = 0, menuItemActive = "active", menuOpenClass = "menu--open", hideClass = "visually-hidden", menuIconActive = "header__burger--active", on} = options;
             const headerElem = document.querySelector(header);
             if (!headerElem) {
                 console.error(`Не найден элемент с селектором "${header}"`);
@@ -4983,19 +4983,21 @@
                 };
                 scrollLock = objectConversion(scrollLock, scrollLockParams, "scrollLock");
             };
-            let stateOpen = `top: ${headerElem.offsetHeight - 5}px;`;
+            let stateOpen = shouldMenuOffsetHeader ? `top: ${headerElem.offsetHeight - 5}px;` : `top: 0;`;
             const stateHide = function() {
                 if (menuOpenClass) menuBodyElem.classList.remove(menuOpenClass);
-                menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px;\n    \t\t\t\t\t\t\t\t\t\t  transition: top 0.35s;`;
+                menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px;`;
             };
             const menuState = function(state) {
                 if (!menu || !menuBodyElem || !menuIconElem) return console.error("MenuState: \nRequired elements: \nmenu\nmenuBody\nmenuIcon");
                 if (state == stateHide) {
                     state();
                     if (menuIconActive) menuIconElem.classList.remove(menuIconActive);
+                    if (pageLock) document.documentElement.classList.remove(pageLockClass);
                 } else {
                     menuBodyElem.style.cssText = state;
                     if (menuIconActive) menuIconElem.classList.add(menuIconActive);
+                    if (pageLock) document.documentElement.classList.add(pageLockClass);
                 }
             };
             const headerMenuOpen = function() {
@@ -5006,7 +5008,7 @@
                     document.querySelector(el).classList.add(scrollLockClass);
                 }));
                 setTimeout((() => {
-                    menuBodyElem.style.transition = "0s";
+                    menuBodyElem.style.transition = "top 0s";
                 }), 100);
                 menuIconElem.blur();
                 attachEvent(window, "click", headerMenuCloseTriggers);
@@ -5083,14 +5085,14 @@
                         const headerHeight = headerElem.offsetHeight;
                         const diff = scroll - pos;
                         elemY = Math.min(0, Math.max(-headerHeight, elemY + diff));
-                        if (menu) stateOpen = `top: ${elemY + (headerHeight - 5)}px`;
+                        if (menu) stateOpen = shouldMenuOffsetHeader ? `top: ${elemY + (headerHeight - 5)}px` : `top: 0`;
                         if (menu && menuBodyElem.classList.contains(menuOpenClass)) menuBodyElem.style.top = `${elemY + (headerHeight - 5)}px`;
                         headerElem.style.top = `${elemY}px`;
                         scroll = pos;
                     };
                     headerHideHandler();
                     attachEvent(window, "scroll", headerHideHandler);
-                } else headerElem.style.position = mql.matches ? "fixed" : "";
+                }
             };
             const headerScrollWatcher = function() {
                 let {headerScrollPosition, headerScrollEndPosition, headerScrollMobile, headerScrollClass} = headerScroll;
@@ -5169,7 +5171,7 @@
                                 const offsetTop = targetElement.getBoundingClientRect().top;
                                 let scrollOptions = {};
                                 scrollOptions.behavior = shouldSmoothScroll ? "smooth" : "auto";
-                                if (shouldOffsetHeader) {
+                                if (shouldScrollOffsetHeader) {
                                     if (!dynamic || dynamic && anchorLinks.length > 0 && link == anchorLinks[0]) if (headerPosition == "fixed") if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - headerHeight - scrollMargin; else if (anchorLinks.length > 0 && link == anchorLinks[0]) scrollOptions.top = offsetTop - headerHeight - mainElementScrollMargin; else scrollOptions.top = offsetTop - scrollMargin; else if (dynamic) if (
                                     //! experimental "+ headerHeight"
                                     targetElement.getBoundingClientRect().y < 0 + headerHeight) scrollOptions.top = offsetTop - headerHeight - scrollMargin; else scrollOptions.top = offsetTop - scrollMargin;
@@ -5208,7 +5210,7 @@
                             menuIconFunc();
                             if (menuBodyElem.classList.contains(menuOpenClass)) {
                                 headerMenuOpen();
-                                menuBodyElem.style.transition = "0s";
+                                menuBodyElem.style.transition = "top 0s";
                             } else headerMenuClose();
                             const {headerScrollMobile, headerScrollClass} = headerScroll;
                             if (!headerScrollMobile) headerElem.classList.remove(headerScrollClass);
@@ -5271,7 +5273,7 @@
                 dynamic,
                 mediaQuery,
                 scrollLock,
-                shouldOffsetHeader,
+                shouldScrollOffsetHeader,
                 shouldSmoothScroll,
                 scrollMargin,
                 mainElement,
@@ -5293,7 +5295,7 @@
                     dynamic,
                     mediaQuery,
                     scrollLock,
-                    shouldOffsetHeader,
+                    shouldScrollOffsetHeader,
                     shouldSmoothScroll,
                     scrollMargin,
                     mainElement,
