@@ -102,7 +102,8 @@ export const dynamicHeader = function (header, options = {}) {
         if (menuOpenClass) {
             menuBodyElem.classList.remove(menuOpenClass);
         }
-        menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px;`;
+        menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px; 
+									  transition: top 0.35s`;
     };
 
     const menuState = function (state) {
