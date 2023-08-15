@@ -4986,7 +4986,7 @@
             let stateOpen = shouldMenuOffsetHeader ? `top: ${headerElem.offsetHeight - 5}px;` : `top: 0;`;
             const stateHide = function() {
                 if (menuOpenClass) menuBodyElem.classList.remove(menuOpenClass);
-                menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px;`;
+                menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px; \n\t\t\t\t\t\t\t\t\t  transition: top 0.35s`;
             };
             const menuState = function(state) {
                 if (!menu || !menuBodyElem || !menuIconElem) return console.error("MenuState: \nRequired elements: \nmenu\nmenuBody\nmenuIcon");
@@ -5445,7 +5445,8 @@
                     },
                     dynamic: true,
                     mediaQuery: 980,
-                    shouldOffsetHeader: true,
+                    shouldScrollOffsetHeader: true,
+                    shouldMenuOffsetHeader: true,
                     scrollMargin: 30,
                     mainElement: ".main",
                     mainElementScrollMargin: 0,
@@ -5462,15 +5463,15 @@
                     consoleMessages: false,
                     on: {
                         customEvent: function() {}
-                    },
-                    admin: true
+                    }
                 });
             }
             if (document.querySelector(".hero-iframe__header")) {
                 let options = {
                     mainElement: ".hero-iframe__main",
                     scrollWatch: false,
-                    shouldOffsetHeader: true,
+                    shouldScrollOffsetHeader: true,
+                    shouldMenuOffsetHeader: true,
                     shouldSmoothScroll: true,
                     scrollLock: false,
                     dynamic: false,
@@ -5557,7 +5558,8 @@
                     mainElement: ".dh-docs__main--1",
                     mediaQuery: 504,
                     scrollMargin: 30,
-                    shouldOffsetHeader: true,
+                    shouldScrollOffsetHeader: true,
+                    shouldMenuOffsetHeader: true,
                     scrollLock: true
                 };
                 new dynamicHeader(".secondary-header__pc--1", options);
@@ -5568,7 +5570,8 @@
                 mediaQuery: 830,
                 scrollMargin: 30,
                 consoleMessages: false,
-                shouldOffsetHeader: true,
+                shouldScrollOffsetHeader: true,
+                shouldMenuOffsetHeader: true,
                 shouldSmoothScroll: true,
                 scrollLock: true
             });
@@ -5576,7 +5579,8 @@
                 dynamic: false,
                 mainElement: ".dh-docs__main--2",
                 scrollMargin: 30,
-                shouldOffsetHeader: true,
+                shouldScrollOffsetHeader: true,
+                shouldMenuOffsetHeader: true,
                 shouldSmoothScroll: false,
                 mediaQuery: 504,
                 scrollLock: false,
@@ -5585,7 +5589,8 @@
             if (document.querySelector(".secondary-header__mobile--2")) dynamicHeader(".secondary-header__mobile--2", {
                 dynamic: false,
                 mainElement: ".dh-docs__main--2",
-                shouldOffsetHeader: true,
+                shouldScrollOffsetHeader: true,
+                shouldMenuOffsetHeader: true,
                 shouldSmoothScroll: false,
                 mediaQuery: 830,
                 scrollLock: false,
