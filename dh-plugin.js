@@ -98,12 +98,22 @@ export const dynamicHeader = function (header, options = {}) {
         ? `top: ${headerElem.offsetHeight - 5}px;`
         : `top: 0;`;
 
-    const stateHide = function () {
+    const stateHide = function (transitionSpeed = 0.35) {
         if (menuOpenClass) {
             menuBodyElem.classList.remove(menuOpenClass);
         }
         menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px; 
-									  transition: top 0.35s`;
+											  transition: top ${transitionSpeed}s`;
+    };
+
+    const menuBodyTopAndHeightCompare = function () {
+        if (
+            stateHide &&
+            menuBodyElem.offsetHeight >
+                Math.abs(parseInt(menuBodyElem.style.top))
+        ) {
+            stateHide(0);
+        }
     };
 
     const menuState = function (state) {
@@ -121,7 +131,7 @@ export const dynamicHeader = function (header, options = {}) {
             if (pageLock) {
                 document.documentElement.classList.remove(pageLockClass);
             }
-            attachEvent(window, "resize", stateHide);
+            attachEvent(window, "resize", menuBodyTopAndHeightCompare);
         } else {
             menuBodyElem.style.cssText = state;
 
@@ -131,7 +141,7 @@ export const dynamicHeader = function (header, options = {}) {
             if (pageLock) {
                 document.documentElement.classList.add(pageLockClass);
             }
-            window.removeEventListener("resize", stateHide);
+            window.removeEventListener("resize", menuBodyTopAndHeightCompare);
         }
     };
 
@@ -141,23 +151,18 @@ export const dynamicHeader = function (header, options = {}) {
         let scrollbarWidth =
             window.innerWidth - document.documentElement.clientWidth;
 
-        // Функция для обновления scrollbarWidth
         const updateScrollbarWidth = () => {
             scrollbarWidth =
                 window.innerWidth - document.documentElement.clientWidth;
         };
 
-        // Создаем новый экземпляр MutationObserver и передаем ему функцию-обработчик
         const mutationObserver = new MutationObserver(
             (mutationsList, observer) => {
-                // Проходимся по списку мутаций
                 for (const mutation of mutationsList) {
-                    // Проверяем, что это мутация атрибута класса
                     if (
                         mutation.type === "attributes" &&
                         mutation.attributeName === "class"
                     ) {
-                        // Получаем текущие классы элемента documentElement
                         const currentClass = document.documentElement.className;
 
                         if (currentClass.includes(classToTrack)) {
@@ -170,15 +175,12 @@ export const dynamicHeader = function (header, options = {}) {
             }
         );
 
-        // Настраиваем наблюдение за изменениями на элементе documentElement
         mutationObserver.observe(document.documentElement, {
             attributes: true,
         });
 
-        // Создаем новый экземпляр ResizeObserver и передаем ему функцию-обработчик
         const resizeObserver = new ResizeObserver(updateScrollbarWidth);
 
-        // Начинаем наблюдение за изменениями размера окна
         resizeObserver.observe(document.documentElement);
     };
     pageLockObserver();
@@ -203,12 +205,6 @@ export const dynamicHeader = function (header, options = {}) {
         }, 100);
 
         menuIconElem.blur();
-        // window.addEventListener("click", headerMenuCloseTriggers);
-        // window.addEventListener("keydown", menuKeyClose);
-        // document.addEventListener("touchmove", handleTouchMove, {
-        //     passive: false,
-        // });
-        // document.addEventListener("wheel", handleWheel, { passive: false });
         attachEvent(window, "click", headerMenuCloseTriggers);
         attachEvent(window, "keydown", menuKeyClose);
         attachEvent(document, "touchmove", handleTouchMove, { passive: false });
@@ -351,7 +347,6 @@ export const dynamicHeader = function (header, options = {}) {
                 scroll = pos;
             };
             headerHideHandler();
-            // window.addEventListener("scroll", headerHideHandler);
             attachEvent(window, "scroll", headerHideHandler);
         }
     };
@@ -387,7 +382,6 @@ export const dynamicHeader = function (header, options = {}) {
             headerPositionCheck();
         };
         if (scrollPosition >= scrollEndPosition) {
-            // window.addEventListener("scroll", handleScrollWatch);
             attachEvent(window, "scroll", handleScrollWatch);
             handleScrollWatch();
         } else {
@@ -446,7 +440,6 @@ export const dynamicHeader = function (header, options = {}) {
                 }
             };
 
-            // window.addEventListener("scroll", handleScroll);
             attachEvent(window, "scroll", handleScroll);
             handleScroll();
         }
@@ -599,7 +592,6 @@ export const dynamicHeader = function (header, options = {}) {
     let menuIconEventAdded = false;
     const menuIconFunc = function () {
         if (menu && menuIconElem && menuIcon && !menuIconEventAdded) {
-            // menuIconElem.addEventListener("click", menuToggle);
             attachEvent(menuIconElem, "click", menuToggle);
             menuIconEventAdded = true;
             menuIconElem.classList.remove(hideClass);
@@ -637,7 +629,6 @@ export const dynamicHeader = function (header, options = {}) {
                 }
             };
 
-            // mql.addEventListener("change", handleMqlChange);
             attachEvent(mql, "change", handleMqlChange);
             handleMqlChange(mql);
         }
@@ -651,7 +642,6 @@ export const dynamicHeader = function (header, options = {}) {
 
     const handleScrollChange = function () {
         headerPositionCheck();
-        // headerHeightAccounting();
     };
 
     const handleMediaQueryChange = function () {
@@ -673,9 +663,7 @@ export const dynamicHeader = function (header, options = {}) {
     headerPositionCheck();
     mqlCheck();
     customFunction();
-    // window.addEventListener("scroll", handleScrollChange);
     attachEvent(window, "scroll", handleScrollChange);
-    // mql.addEventListener("change", handleMediaQueryChange);
     attachEvent(mql, "change", handleMediaQueryChange);
 
     function attachEvent(element, event, handler, options) {

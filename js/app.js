@@ -4984,9 +4984,12 @@
                 scrollLock = objectConversion(scrollLock, scrollLockParams, "scrollLock");
             };
             let stateOpen = shouldMenuOffsetHeader ? `top: ${headerElem.offsetHeight - 5}px;` : `top: 0;`;
-            const stateHide = function() {
+            const stateHide = function(transitionSpeed = .35) {
                 if (menuOpenClass) menuBodyElem.classList.remove(menuOpenClass);
-                menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px; \n\t\t\t\t\t\t\t\t\t  transition: top 0.35s`;
+                menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px; \n\t\t\t\t\t\t\t\t\t\t\t  transition: top ${transitionSpeed}s`;
+            };
+            const menuBodyTopAndHeightCompare = function() {
+                if (stateHide && menuBodyElem.offsetHeight > Math.abs(parseInt(menuBodyElem.style.top))) stateHide(0);
             };
             const menuState = function(state) {
                 if (!menu || !menuBodyElem || !menuIconElem) return console.error("MenuState: \nRequired elements: \nmenu\nmenuBody\nmenuIcon");
@@ -4994,12 +4997,12 @@
                     state();
                     if (menuIconActive) menuIconElem.classList.remove(menuIconActive);
                     if (pageLock) document.documentElement.classList.remove(pageLockClass);
-                    attachEvent(window, "resize", stateHide);
+                    attachEvent(window, "resize", menuBodyTopAndHeightCompare);
                 } else {
                     menuBodyElem.style.cssText = state;
                     if (menuIconActive) menuIconElem.classList.add(menuIconActive);
                     if (pageLock) document.documentElement.classList.add(pageLockClass);
-                    window.removeEventListener("resize", stateHide);
+                    window.removeEventListener("resize", menuBodyTopAndHeightCompare);
                 }
             };
             const pageLockObserver = function() {
