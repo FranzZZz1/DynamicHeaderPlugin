@@ -4863,17 +4863,22 @@
                         }
                     },
                     on: {
+                        transitionStart: function() {
+                            const previewSwiper = this;
+                            document.querySelector(".swiper-button-prev").disabled = true;
+                            document.querySelector(".swiper-button-next").disabled = true;
+                            previewSwiper.autoplay.stop();
+                        },
+                        transitionEnd: function() {
+                            const previewSwiper = this;
+                            document.querySelector(".swiper-button-prev").disabled = false;
+                            document.querySelector(".swiper-button-next").disabled = false;
+                            previewSwiper.autoplay.start();
+                        },
                         init: function() {
                             let swiper = this;
                             let prevButton = document.querySelector(".swiper-button-prev");
                             let nextButton = document.querySelector(".swiper-button-next");
-                            function updateButtons() {
-                                prevButton.removeAttribute("disabled");
-                                prevButton.classList.remove("swiper-button-disabled");
-                                nextButton.removeAttribute("disabled");
-                                nextButton.classList.remove("swiper-button-disabled");
-                            }
-                            updateButtons();
                             prevButton.addEventListener("click", (function() {
                                 if (!isTransitioning) if (swiper.isBeginning) swiper.slideTo(swiper.slides.length - 1, swiperSpeed); else swiper.slidePrev();
                             }));
@@ -4881,7 +4886,6 @@
                                 if (!isTransitioning) if (swiper.isEnd) swiper.slideTo(0, swiperSpeed); else swiper.slideNext();
                             }));
                             swiper.on("transitionStart", (function() {
-                                updateButtons();
                                 isTransitioning = true;
                             }));
                             swiper.on("transitionEnd", (function() {

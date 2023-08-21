@@ -614,13 +614,8 @@ pre {
   transition: all 0.3s;
 }
 
-.preview__button.swiper-button-disabled {
-  background-color: rgba(var(--preview-color-rgb), 0.4);
-  border-color: transparent;
-}
-
-.preview__button.swiper-button-disabled svg {
-  fill: rgba(var(--preview-color-rgb), 0.7);
+.preview__button:disabled {
+  color: #000;
 }
 
 .preview__link {
