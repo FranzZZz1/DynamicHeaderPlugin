@@ -5449,6 +5449,13 @@
                     menuLink: ".header__menu-link",
                     menu: true,
                     scrollWatch: true,
+                    headerScroll: {
+                        headerScrollPosition: 130,
+                        headerScrollEndPosition: 100,
+                        headerScrollMobile: true,
+                        headerScrollClass: "header-dark"
+                    },
+                    dynamic: true,
                     mediaQuery: 980,
                     shouldScrollOffsetHeader: true,
                     shouldMenuOffsetHeader: true,
@@ -5466,7 +5473,6 @@
                     hideClass: "visually-hidden",
                     menuIconActive: "header__burger--active",
                     consoleMessages: false,
-                    headerHeightValue: 1e3,
                     on: {
                         customEvent: function() {}
                     }
