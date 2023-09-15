@@ -1,6 +1,3 @@
-// import "/src/scss/css-modules/dynamic-header.scss";
-// import "/src/scss/dh-docs.scss";
-
 export const dynamicHeader = function (header, options = {}) {
     if (!document.querySelector("header")) return;
     if (!header) {
@@ -32,13 +29,24 @@ export const dynamicHeader = function (header, options = {}) {
         hideClass = "visually-hidden",
         menuIconActive = "header__burger--active",
         on,
+        //! new
+        speed = 350,
+        animationClass = false,
+        headerHeightValue = false,
+        //! new end
     } = options;
     const headerElem = document.querySelector(header);
     if (!headerElem) {
         console.error(`Не найден элемент с селектором "${header}"`);
         return;
     }
-    const headerHeight = headerElem.offsetHeight;
+    // ! Changed ----------------------
+    let headerHeight =
+        headerHeightValue && headerScroll
+            ? headerHeightValue
+            : headerElem.offsetHeight;
+    // ! -------------------------------
+    console.log(headerHeight);
     const menuIconElem = headerElem.querySelector(menuIcon);
     const menuBodyElem = headerElem.querySelector(menuBody);
 
@@ -49,6 +57,7 @@ export const dynamicHeader = function (header, options = {}) {
             "\nНе заполнены обязательные поля:\nmenuIcon: class required\nmenuBody: class required"
         );
     }
+
     function objectConversion(mainParam, params, mainParamName) {
         if (mainParam) {
             const expectedKeys = Object.keys(mainParam);
@@ -93,17 +102,16 @@ export const dynamicHeader = function (header, options = {}) {
             "scrollLock"
         );
     };
-
     let stateOpen = shouldMenuOffsetHeader
         ? `top: ${headerElem.offsetHeight - 5}px;`
         : `top: 0;`;
 
-    const stateHide = function (transitionSpeed = 0.35) {
+    const stateHide = function (transitionSpeed = speed) {
         if (menuOpenClass) {
             menuBodyElem.classList.remove(menuOpenClass);
         }
-        menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight}px; 
-											  transition: top ${transitionSpeed}s`;
+        menuBodyElem.style.cssText = `top: -${menuBodyElem.offsetHeight + 5}px; 
+											  transition: top ${transitionSpeed}ms`;
     };
 
     const menuBodyTopAndHeightCompare = function () {
@@ -151,11 +159,6 @@ export const dynamicHeader = function (header, options = {}) {
         let scrollbarWidth =
             window.innerWidth - document.documentElement.clientWidth;
 
-        const updateScrollbarWidth = () => {
-            scrollbarWidth =
-                window.innerWidth - document.documentElement.clientWidth;
-        };
-
         const mutationObserver = new MutationObserver(
             (mutationsList, observer) => {
                 for (const mutation of mutationsList) {
@@ -178,10 +181,6 @@ export const dynamicHeader = function (header, options = {}) {
         mutationObserver.observe(document.documentElement, {
             attributes: true,
         });
-
-        const resizeObserver = new ResizeObserver(updateScrollbarWidth);
-
-        resizeObserver.observe(document.documentElement);
     };
     pageLockObserver();
 
@@ -205,6 +204,13 @@ export const dynamicHeader = function (header, options = {}) {
         }, 100);
 
         menuIconElem.blur();
+
+        // window.addEventListener("click", headerMenuCloseTriggers);
+        // window.addEventListener("keydown", menuKeyClose);
+        // document.addEventListener("touchmove", handleTouchMove, {
+        //     passive: false,
+        // });
+        // document.addEventListener("wheel", handleWheel, { passive: false });
         attachEvent(window, "click", headerMenuCloseTriggers);
         attachEvent(window, "keydown", menuKeyClose);
         attachEvent(document, "touchmove", handleTouchMove, { passive: false });
@@ -227,6 +233,8 @@ export const dynamicHeader = function (header, options = {}) {
                     .classList.remove(scrollLockClass);
             });
         }
+
+        headerElem.classList.remove("menu--opened");
 
         window.removeEventListener("click", headerMenuCloseTriggers);
         window.removeEventListener("keydown", menuKeyClose);
@@ -290,27 +298,23 @@ export const dynamicHeader = function (header, options = {}) {
     };
 
     const headerPositionCheck = function () {
-        if (mainElement) {
-            const headerStyles = window.getComputedStyle(headerElem);
-            const headerPosition = headerStyles.getPropertyValue("position");
+        if (!mainElement) return;
+        const headerStyles = window.getComputedStyle(headerElem);
+        const headerPosition = headerStyles.getPropertyValue("position");
 
-            const main = document.querySelector(mainElement);
-            if (main) {
-                if (headerPosition == "absolute" || headerPosition == "fixed") {
-                    main.style.marginTop = `${
-                        headerElem.offsetHeight +
-                        (mainElementScrollMargin ? mainElementScrollMargin : 0)
-                    }px`;
-                    headerElem.style.marginBottom = "";
-                } else {
-                    headerElem.style.marginBottom =
-                        0 +
-                        (mainElementScrollMargin
-                            ? mainElementScrollMargin
-                            : 0) +
-                        "px";
-                    main.style.marginTop = "";
-                }
+        const main = document.querySelector(mainElement);
+        if (main) {
+            if (headerPosition == "absolute" || headerPosition == "fixed") {
+                main.style.marginTop = `${
+                    headerElem.offsetHeight +
+                    (mainElementScrollMargin ? mainElementScrollMargin : 0)
+                }px`;
+                headerElem.style.marginBottom = "";
+            } else {
+                headerElem.style.marginBottom =
+                    (mainElementScrollMargin ? mainElementScrollMargin : 0) +
+                    "px";
+                main.style.marginTop = "";
             }
         }
     };
@@ -347,41 +351,87 @@ export const dynamicHeader = function (header, options = {}) {
                 scroll = pos;
             };
             headerHideHandler();
+            // window.addEventListener("scroll", headerHideHandler);
             attachEvent(window, "scroll", headerHideHandler);
         }
     };
 
+    // const headerScrollWatcher = function () {
+    //     let {
+    //         headerScrollPosition,
+    //         headerScrollEndPosition,
+    //         headerScrollMobile,
+    //         headerScrollClass,
+    //     } = headerScroll;
+
+    //     let scrollPosition =
+    //         headerScrollPosition !== undefined && headerScrollPosition !== false
+    //             ? headerScrollPosition
+    //             : headerHeight;
+
+    //     let scrollEndPosition =
+    //         headerScrollEndPosition !== undefined &&
+    //         headerScrollEndPosition !== false
+    //             ? headerScrollEndPosition
+    //             : (headerScrollEndPosition =
+    //                   scrollPosition > 0 ? scrollPosition - 1 : scrollPosition);
+    //     const handleScrollWatch = function () {
+    //         const pos = window.pageYOffset;
+    //         const isMobile = headerScrollMobile ? true : !mql.matches;
+
+    //         if (isMobile && pos >= scrollPosition) {
+    //             headerElem.classList.add(headerScrollClass);
+    //         } else if (pos <= scrollEndPosition) {
+    //             headerElem.classList.remove(headerScrollClass);
+    //         }
+    //         headerPositionCheck();
+    //     };
+    //     if (scrollPosition >= scrollEndPosition) {
+    //         // window.addEventListener("scroll", handleScrollWatch);
+    //         attachEvent(window, "scroll", handleScrollWatch);
+    //         handleScrollWatch();
+    //     } else {
+    //         headerElem.classList.remove(headerScrollClass);
+    //         window.removeEventListener("scroll", handleScrollWatch);
+
+    //         console.error(
+    //             `headerScrollEndPosition must be less than or equal to headerScrollPosition`
+    //         );
+    //     }
+    // };
+
     const headerScrollWatcher = function () {
+        if (!headerScroll) return;
+
         let {
-            headerScrollPosition,
+            headerScrollPosition = headerHeight,
             headerScrollEndPosition,
             headerScrollMobile,
             headerScrollClass,
         } = headerScroll;
 
-        let scrollPosition =
-            headerScrollPosition !== undefined && headerScrollPosition !== false
-                ? headerScrollPosition
-                : headerHeight;
-
-        let scrollEndPosition =
-            headerScrollEndPosition !== undefined &&
+        const isMobile = headerScrollMobile ? true : !mql.matches;
+        const scrollEndPosition =
             headerScrollEndPosition !== false
                 ? headerScrollEndPosition
                 : (headerScrollEndPosition =
-                      scrollPosition > 0 ? scrollPosition - 1 : scrollPosition);
+                      headerScrollPosition > 0
+                          ? headerScrollPosition - 1
+                          : headerScrollPosition);
+
         const handleScrollWatch = function () {
             const pos = window.pageYOffset;
-            const isMobile = headerScrollMobile ? true : !mql.matches;
 
-            if (isMobile && pos >= scrollPosition) {
+            if (isMobile && pos >= headerScrollPosition) {
                 headerElem.classList.add(headerScrollClass);
+                mainElement && headerPositionCheck();
             } else if (pos <= scrollEndPosition) {
                 headerElem.classList.remove(headerScrollClass);
+                mainElement && headerPositionCheck();
             }
-            headerPositionCheck();
         };
-        if (scrollPosition >= scrollEndPosition) {
+
+        if (headerScrollPosition >= scrollEndPosition) {
             attachEvent(window, "scroll", handleScrollWatch);
             handleScrollWatch();
         } else {
@@ -394,60 +444,110 @@ export const dynamicHeader = function (header, options = {}) {
         }
     };
 
+    // const scrollWatcher = function () {
+    //     if (scrollWatch && menuItem) {
+    //         const menuItems = headerElem.querySelectorAll(menuItem);
+    //         const headerHeightTimes2 = headerHeight * 2;
+
+    //         const handleScroll = function () {
+    //             const scrollPosition = window.pageYOffset;
+    //             let currentActiveMenuItem = null;
+
+    //             menuItems.forEach((menuItem) => {
+    //                 const targetId = menuLink
+    //                     ? menuItem.querySelector(menuLink).getAttribute("href")
+    //                     : menuItem.querySelector("a").getAttribute("href");
+    //                 if (!targetId) {
+    //                     console.error(
+    //                         `${header}:\nОтсутствует тег "a" в menuItem, либо атрибут href.`
+    //                     );
+    //                     return;
+    //                 }
+    //                 const section = document.querySelector(targetId);
+    //                 if (!section) {
+    //                     console.error(
+    //                         `${header}:\nОтсутствуют section с id, соответствующим href в menuLink.`
+    //                     );
+    //                     return;
+    //                 }
+    //                 const sectionTop =
+    //                     section.getBoundingClientRect().top + scrollPosition;
+    //                 const isSectionVisible =
+    //                     sectionTop <= scrollPosition + headerHeightTimes2;
+
+    //                 if (isSectionVisible) {
+    //                     currentActiveMenuItem = menuItem;
+    //                 }
+    //                 menuItem.classList.remove(menuItemActive);
+    //             });
+
+    //             if (currentActiveMenuItem) {
+    //                 currentActiveMenuItem.classList.add(menuItemActive);
+    //             }
+    //         };
+
+    //         // window.addEventListener("scroll", handleScroll);
+    //         attachEvent(window, "scroll", handleScroll);
+    //         handleScroll();
+    //     }
+    // };
+
     const scrollWatcher = function () {
-        if (scrollWatch && menuItem) {
-            const menuItems = headerElem.querySelectorAll(menuItem);
-            const headerHeight = headerElem.offsetHeight;
-            const headerHeightTimes2 = headerHeight * 2;
+        if (!scrollWatch || !menuItem) return;
 
-            const handleScroll = function () {
-                const scrollPosition = window.pageYOffset;
-                let currentActiveMenuItem = null;
-
-                menuItems.forEach((menuItem) => {
-                    const targetId = menuLink
-                        ? menuItem.querySelector(menuLink).getAttribute("href")
-                        : menuItem.querySelector("a").getAttribute("href");
-                    if (!targetId) {
-                        console.error(
-                            `${header}:\nОтсутствует тег "a" в menuItem, либо атрибут href.`
-                        );
-                        return;
-                    }
-                    const section = document.querySelector(targetId);
-                    if (!section) {
-                        console.error(
-                            `${header}:\nОтсутствуют section с id, соответствующим href в menuLink.`
-                        );
-                        return;
-                    }
-                    const sectionTop =
-                        section.getBoundingClientRect().top + scrollPosition;
-                    const isSectionVisible =
-                        sectionTop <= scrollPosition + headerHeightTimes2;
-
-                    if (isSectionVisible) {
-                        currentActiveMenuItem = menuItem;
-                    }
-                });
-
-                menuItems.forEach((menuItem) => {
-                    menuItem.classList.remove(menuItemActive);
-                });
-
-                if (currentActiveMenuItem) {
-                    currentActiveMenuItem.classList.add(menuItemActive);
+        const menuItems = headerElem.querySelectorAll(menuItem);
+        const headerHeightTimes2 = headerHeight * 2;
+        const sections = Array.from(menuItems)
+            .map((menuItem) => {
+                const targetId = menuLink
+                    ? menuItem.querySelector(menuLink).getAttribute("href")
+                    : menuItem.querySelector("a").getAttribute("href");
+                if (!targetId) {
+                    console.error(
+                        `${header}:\nОтсутствует тег "a" в menuItem, либо атрибут href.`
+                    );
+                    return null;
                 }
-            };
+                const section = document.querySelector(targetId);
+                if (!section) {
+                    console.error(
+                        `${header}:\nОтсутствуют section с id, соответствующим href в menuLink.`
+                    );
+                    return null;
+                }
+                return section;
+            })
+            .filter(Boolean);
 
-            attachEvent(window, "scroll", handleScroll);
-            handleScroll();
-        }
+        const handleScroll = function () {
+            const scrollPosition = window.pageYOffset;
+            let currentActiveMenuItem = null;
+
+            sections.forEach((section, index) => {
+                const sectionTop =
+                    section.getBoundingClientRect().top + scrollPosition;
+                const isSectionVisible =
+                    sectionTop <= scrollPosition + headerHeightTimes2;
+
+                if (isSectionVisible) {
+                    currentActiveMenuItem = menuItems[index];
+                }
+                menuItems[index].classList.remove(menuItemActive);
+            });
+
+            if (currentActiveMenuItem) {
+                currentActiveMenuItem.classList.add(menuItemActive);
+            }
+        };
+
+        // Добавляем делегированный обработчик события scroll к родительскому элементу
+        // window.addEventListener("scroll", handleScroll);
+        attachEvent(window, "scroll", handleScroll);
+        handleScroll();
     };
 
     let headerHeightEventAdded = false;
     const headerHeightAccounting = function () {
-        const headerHeight = headerElem.offsetHeight;
         const anchorLinks = document.querySelectorAll(`a[href^="#"]`);
 
         if (!anchorLinks) {
@@ -483,18 +583,13 @@ export const dynamicHeader = function (header, options = {}) {
                             ? "smooth"
                             : "auto";
 
+                        const isFirstLink = shouldScrollOffsetHeader
+                            ? anchorLinks.length > 0 && link == anchorLinks[0]
+                            : false;
                         if (shouldScrollOffsetHeader) {
-                            if (
-                                !dynamic ||
-                                (dynamic &&
-                                    anchorLinks.length > 0 &&
-                                    link == anchorLinks[0])
-                            ) {
+                            if (!dynamic || (dynamic && isFirstLink)) {
                                 if (headerPosition == "fixed") {
-                                    if (
-                                        anchorLinks.length > 0 &&
-                                        link == anchorLinks[0]
-                                    ) {
+                                    if (isFirstLink) {
                                         scrollOptions.top =
                                             offsetTop -
                                             headerHeight -
@@ -506,10 +601,7 @@ export const dynamicHeader = function (header, options = {}) {
                                             scrollMargin;
                                     }
                                 } else {
-                                    if (
-                                        anchorLinks.length > 0 &&
-                                        link == anchorLinks[0]
-                                    ) {
+                                    if (isFirstLink) {
                                         scrollOptions.top =
                                             offsetTop -
                                             headerHeight -
@@ -539,10 +631,7 @@ export const dynamicHeader = function (header, options = {}) {
                             }
                         } else {
                             if (dynamic) {
-                                if (
-                                    anchorLinks.length > 0 &&
-                                    link == anchorLinks[0]
-                                ) {
+                                if (isFirstLink) {
                                     scrollOptions.top =
                                         offsetTop -
                                         headerHeight -
@@ -552,10 +641,7 @@ export const dynamicHeader = function (header, options = {}) {
                                         offsetTop - scrollMargin;
                                 }
                             } else {
-                                if (
-                                    anchorLinks.length > 0 &&
-                                    link == anchorLinks[0]
-                                ) {
+                                if (isFirstLink) {
                                     scrollOptions.top =
                                         offsetTop -
                                         headerHeight -
@@ -572,11 +658,12 @@ export const dynamicHeader = function (header, options = {}) {
                 }
             };
             if (!headerHeightEventAdded) {
-                // link.addEventListener("click", handleHeightAccounting);
                 attachEvent(link, "click", handleHeightAccounting);
             }
         });
     };
+
+    let transitionTimeout;
 
     const menuToggle = function () {
         if (menu && menuBodyElem) {
@@ -586,12 +673,21 @@ export const dynamicHeader = function (header, options = {}) {
             } else {
                 headerMenuClose();
             }
+
+            if (animationClass) {
+                headerElem.classList.add(animationClass);
+                transitionTimeout = setTimeout(() => {
+                    clearTimeout(transitionTimeout);
+                    headerElem.classList.remove(animationClass);
+                }, speed);
+            }
         }
     };
 
     let menuIconEventAdded = false;
     const menuIconFunc = function () {
         if (menu && menuIconElem && menuIcon && !menuIconEventAdded) {
+            // menuIconElem.addEventListener("click", menuToggle);
             attachEvent(menuIconElem, "click", menuToggle);
             menuIconEventAdded = true;
             menuIconElem.classList.remove(hideClass);
@@ -629,6 +725,7 @@ export const dynamicHeader = function (header, options = {}) {
                 }
             };
 
+            // mql.addEventListener("change", handleMqlChange);
             attachEvent(mql, "change", handleMqlChange);
             handleMqlChange(mql);
         }
@@ -640,16 +737,13 @@ export const dynamicHeader = function (header, options = {}) {
         }
     };
 
-    const handleScrollChange = function () {
-        headerPositionCheck();
-    };
-
     const handleMediaQueryChange = function () {
-        headerHide();
+        dynamic && headerHide();
 
         headerPositionCheck();
 
-        headerHeightAccounting();
+        (shouldScrollOffsetHeader || shouldSmoothScroll) &&
+            headerHeightAccounting();
         headerHeightEventAdded = true;
 
         headerScroll && headerScrollWatcher();
@@ -657,13 +751,14 @@ export const dynamicHeader = function (header, options = {}) {
 
     allObjectConversions();
     headerScroll && headerScrollWatcher();
-    headerHide();
-    scrollWatcher();
-    headerHeightAccounting();
-    headerPositionCheck();
+    dynamic && headerHide();
+    scrollWatch && scrollWatcher();
+    (shouldScrollOffsetHeader || shouldSmoothScroll) &&
+        headerHeightAccounting();
     mqlCheck();
     customFunction();
-    attachEvent(window, "scroll", handleScrollChange);
+    headerPositionCheck();
+    attachEvent(window, "scroll", headerPositionCheck);
     attachEvent(mql, "change", handleMediaQueryChange);
 
     function attachEvent(element, event, handler, options) {
@@ -674,11 +769,10 @@ export const dynamicHeader = function (header, options = {}) {
             },
         };
     }
-
     const destroy = function () {
         menuIconElem.removeEventListener("click", menuToggle);
         // menuIconEventAdded = false;
-        window.removeEventListener("scroll", handleScrollChange);
+        window.removeEventListener("scroll", headerPositionCheck);
         mql.removeEventListener("change", handleMediaQueryChange);
     };
 
